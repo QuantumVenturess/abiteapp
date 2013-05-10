@@ -1,3 +1,9 @@
+// Ready table
+<% if @table.ready? %>
+  window.location = "<%= room_path(@table.room) %>";
+<% end %>
+
+// Table Show
 // Remove join table form from table show
 $('.table_show .joinTable .join').remove();
 // Insert leave form
@@ -6,6 +12,8 @@ $('.table_show .leave_table').html(
 // Insert user seat table show
 $('.table_show .seats').append('<%= j render partial: "seats/user_seat", 
   object: current_user, as: :user %>');
+
+// Explore
 // Remove join table form from explore
 $('.tables #table_' + <%= @table.id %> + ' .join').remove();
 // Insert user seat from explore
@@ -15,6 +23,7 @@ $('.tables #table_' + <%= @table.id %> + ' .seats').append(
 // Update People sitting count
 $('.seats h1 span').text(
   '<%= @table.seats.size %> out of <%= @table.max_seats %>');
+
 // Lazy load
 $('.lazyLoad').each(function() {
   var original = $(this).attr('data-original');

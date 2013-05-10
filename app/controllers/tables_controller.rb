@@ -10,10 +10,10 @@ class TablesController < ApplicationController
     table.check_ready
     # Create notifications for all users who are sitting at table
     table.create_notifications(current_user, seat)
+    flash[:success] = 'This table is ready to go' if table.ready
     respond_to do |format|
       format.html {
-        if table.ready && table.room
-          flash[:success] = 'This table is ready to go'
+        if table.ready
           redirect_to table.room
         else
           flash[:success] = 'You are now sitting at this table'

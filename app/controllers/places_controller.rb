@@ -48,7 +48,11 @@ class PlacesController < ApplicationController
 
     # Create table and initial seat
     if params[:max_seats].empty?
-      max_seats = 4
+      if params[:max_seats_hidden].empty?
+        max_seats = 2
+      else
+        max_seats = params[:max_seats_hidden]
+      end
     elsif params[:max_seats].to_i > 16
       max_seats = 16
     elsif params[:max_seats].to_i < 2

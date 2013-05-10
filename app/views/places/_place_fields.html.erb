@@ -3,6 +3,7 @@
 <%= hidden_field_tag :image_url, place['image_url'] %>
 <%= hidden_field_tag :latitude, place['location']['coordinate']['latitude'] %>
 <%= hidden_field_tag :longitude, place['location']['coordinate']['longitude'] %>
+<%= hidden_field_tag :max_seats_hidden, '', class: 'max_seats_hidden' %>
 <%= hidden_field_tag :name, place['name'] %>
 <%= hidden_field_tag :phone, place['phone'] %>
 <%= hidden_field_tag :postal_code, place['location']['postal_code'] %>

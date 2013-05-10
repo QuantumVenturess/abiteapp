@@ -20,6 +20,12 @@
   </div>
   <h1><%= @room.table.place.name %></h1>
   <div class="messages">
+    <div class="users">
+      <% @room.table.seats.order('created_at ASC').each do |seat| %>
+        <%= render partial: 'seats/seat', object: seat %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
     <%= render @messages %>
   </div>
   <div class="messageForm">

@@ -1,5 +1,18 @@
 .messages {
   padding: 10px 0;
+  .users {
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    .seat {
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      width: 60px;
+      img {
+        max-width: 60px;
+      }
+    }
+  }
   .message {
     font-size: 14px;
     line-height: 21px;
