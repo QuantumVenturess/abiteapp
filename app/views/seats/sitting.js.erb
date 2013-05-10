@@ -4,17 +4,8 @@ $('.ready .tables').append('<%= j render partial: "seats/sitting_table",
 $('.waiting .tables').append('<%= j render partial: "seats/sitting_table", 
   object: @seats_waiting, as: :seats %>');
 // Remove and add pagination
-<% if @seats_ready.num_pages == @seats_ready.current_page || @seats_waiting.num_pages == @seats_waiting.current_page %>
-  $('.page').remove();
-<% else %>
-  <% if @seats_ready.num_pages > @seats_waiting.num_pages %>
-    $('.page').html('<%= render partial: "shared/pagination", object: 
-      @seats_ready, as: :objects %>');
-  <% else %>
-    $('.page').html('<%= render partial: "shared/pagination", object: 
-      @seats_waiting, as: :objects %>');
-  <% end %>
-<% end %>
+$('.page').html('<%= j render partial: "shared/pagination", 
+  object: @objects, as: :objects %>');
 // Lazy load
 $('.lazyLoad').each(function() {
   var original = $(this).attr('data-original');

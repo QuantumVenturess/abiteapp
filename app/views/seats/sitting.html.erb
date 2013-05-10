@@ -22,9 +22,5 @@
   </div>
 </div>
 <div class="page">
-  <% if @seats_ready.num_pages > @seats_waiting.num_pages %>
-    <%= render partial: 'shared/pagination', object: @seats_ready, as: :objects %>
-  <% else %>
-    <%= render partial: 'shared/pagination', object: @seats_waiting, as: :objects %>
-  <% end %>
+  <%= render partial: 'shared/pagination', object: @objects, as: :objects %>
 </div>
