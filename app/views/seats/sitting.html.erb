@@ -22,7 +22,7 @@
   </div>
 </div>
 <div class="page">
-  <% if @ready.size > @waiting.size %>
+  <% if @seats_ready.num_pages > @seats_waiting.num_pages %>
     <%= render partial: 'shared/pagination', object: @seats_ready, as: :objects %>
   <% else %>
     <%= render partial: 'shared/pagination', object: @seats_waiting, as: :objects %>
