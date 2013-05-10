@@ -63,10 +63,11 @@ class PlacesController < ApplicationController
     seat          = current_user.seats.new
     seat.table_id = table.id
     seat.save
-    
     # FB open graph action
-    current_user.open_graph('start', table)
-
+    if Rails.env.production?
+      current_user.delay(queue: 'open_graph', 
+        priority: 9).open_graph('start', table)
+    end
     flash[:success] = 'Table started'
     redirect_to table
   end
