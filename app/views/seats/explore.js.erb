@@ -19,3 +19,8 @@ $('.link').click(function() {
     window.location = $(this).attr('href');
   };
 });
+// Forms
+$('form button').click(function() {
+  $(this).closest('form').submit();
+  return false;
+});
