@@ -15,16 +15,12 @@ $('.tables #table_' + <%= @table.id %> + ' .seats').append(
 // Update People sitting count
 $('.seats h1 span').text(
   '<%= @table.seats.size %> out of <%= @table.max_seats %>');
-
-$('.lazy').lazyload({
-  failure_limit: 50,
-  skip_invisible: false
+// Lazy load
+$('.lazyLoad').each(function() {
+  var original = $(this).attr('data-original');
+  $(this).attr('src', original);
 });
-$('.lazyLoad').lazyload({
-  event: 'load',
-  failure_limit: 50
-});
-
+// Link
 $('.link').click(function() {
   if ($(this).attr('href')) {
     window.location = $(this).attr('href');

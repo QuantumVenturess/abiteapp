@@ -9,13 +9,9 @@ $('.userShow .complete').append('<%= j render partial: "users/complete_tables",
     object: @seats, as: :objects %>');
 <% end %>
 // Lazy load
-$('.lazy').lazyload({
-  failure_limit: 50,
-  skip_invisible: false
-});
-$('.lazyLoad').lazyload({
-  event: 'load',
-  failure_limit: 50
+$('.lazyLoad').each(function() {
+  var original = $(this).attr('data-original');
+  $(this).attr('src', original);
 });
 // Links
 $('.link').click(function() {
