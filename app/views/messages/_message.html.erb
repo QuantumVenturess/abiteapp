@@ -1,0 +1,9 @@
+<div class="message">
+  <div class="content">
+    <%= link_to message.user.name, message.user %>
+    <%= message.content %>
+  </div>
+  <div class="timestamp">
+    <%= time_ago_in_words(message.created_at) %> ago
+  </div>
+</div>

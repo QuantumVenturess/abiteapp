@@ -1,0 +1,5 @@
+<% if @results %>
+  <% @results.each do |place| %>
+    <%= render partial: 'places/result', object: place, as: :place %>
+  <% end %>
+<% end %>

@@ -1,0 +1,33 @@
+.messages {
+  padding: 10px 0;
+  .message {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0 0 5px 0;
+    padding: 0 10px;
+    &:last-child {
+      margin: 0;
+    }
+    .content {
+      a {
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+    .timestamp {
+      color: rgb(160, 160, 160);
+    }
+  }
+}
+
+.messageForm {
+  background: rgb(240, 240, 240);
+  border-top: 1px solid rgb(120, 120, 120);
+  padding: 10px 10px 59px 10px;
+  textarea {
+    height: 76px;
+  }
+  .action {
+    margin: 10px 0 0 0;
+  }
+}

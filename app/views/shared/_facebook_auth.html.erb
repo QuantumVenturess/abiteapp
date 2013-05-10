@@ -1,0 +1,8 @@
+<% if !signed_in? %>
+  <div class="facebookAuth">
+    <%= link_to facebook_url do %>
+      <%= image_tag 'facebook.png' %>
+      <p>Join using Facebook</p>
+    <% end %>
+  </div>
+<% end %>

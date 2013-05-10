@@ -1,0 +1,9 @@
+<%= content_for :explore_class do %>
+  active
+<% end %>
+<div class="tables">
+  <%= render @tables %>
+</div>
+<div class="page">
+  <%= render partial: 'shared/pagination', object: @tables, as: :objects %>
+</div>

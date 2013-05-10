@@ -1,0 +1,31 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.flash {
+  @include browser(box-sizing, border-box);
+  font-size: 14px;
+  max-width: 640px;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+  &.success {
+    background: rgb(230, 239, 194);
+    border: 1px solid rgb(110, 220, 90);
+    color: rgb(38, 68, 9);
+  }
+  &.error {
+    background: rgb(251, 227, 228);
+    border: 1px solid rgb(255, 26, 0);
+    color: rgb(138, 31, 17);
+  }
+  &.notice {
+    background: rgb(255, 246, 191);
+    border: 1px solid rgb(255, 211, 36);
+    color: rgb(81, 71, 33);
+  }
+}

@@ -1,0 +1,33 @@
+/* Search */
+.place_search {
+  padding: 10px;
+  .field {
+    margin: 0 0 5px 0;
+  }
+  .field.location {
+    float: left;
+    margin: 0;
+  }
+  .field.location, .action {
+    width: 49%;
+  }
+  .action {
+    float: right;
+  }
+}
+
+.table_form {
+  margin: 10px 0 0 0;
+  .action {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 20%;
+  }
+  .field {
+    float: right;
+    width: 78%;
+    input {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<%= form_tag do %>
+  <div class="field">
+    <%= text_field_tag :term, params[:term], placeholder: 'Name of Place' %>
+  </div>
+  <div class="field">
+    <%= text_field_tag :location, params[:location], placeholder: 'Current Location ' %>
+  </div>
+  <div class="action">
+    <%= submit_tag 'Submit' %>
+  </div>
+<% end %>
+
+<% if params[:term] %>
+  <h1>Result</h1>
+  <% @result.each do |place| %>
+    <% if place['image_url'] %>
+      <%= image_tag place['image_url'] %>
+    <% end %>
+    <p><%= place['name'] %> (<%= place['id'] %>)</p>
+    <p><%= place['phone'] %></p>
+    <p><%= place['location']['address'][0] %></p>
+    <p><%= place['location']['city'] %></p>
+    <p><%= place['location']['state_code'] %></p>
+    <p><%= place['location']['postal_code'] %></p>
+    <p><%= place['location']['coordinate']['latitude'] %></p>
+    <p><%= place['location']['coordinate']['longitude'] %></p>
+    <p><%= place['rating'] %>/5 <%= place['review_count'] %></p>
+    <%= render partial: 'places/new_place_form', object: place, as: :place %>
+  <% end %>
+
+  <%= @result %>
+<% end %>

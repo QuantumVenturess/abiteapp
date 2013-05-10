@@ -1,58 +1,53 @@
 Abiteapp::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  resources :notifications do
+    member do
+      get :forward
+    end
+  end
+  resources :places
+  resources :rooms do
+    member do
+      post :message
+    end
+  end
+  resources :seats
+  resources :tables do
+    member do
+      post :join
+      get :mark_complete
+      get :permalink
+    end
+  end
+  resources :users
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  root to: 'seats#explore'
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  # Notifications
+  match '/news', to: 'notifications#news', as: 'news'
+  match '/clear-news', to: 'notifications#clear_news', as: 'clear_news'
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  # Pages
+  match 'about', to: 'pages#about', as: 'about'
+  match 'test', to: 'pages#test', as: 'test'
+  match 'yelp', to: 'pages#yelp', as: 'yelp'
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  # Seats
+  match 'explore', to: 'seats#explore', as: 'explore'
+  match 'sitting', to: 'seats#sitting', as: 'sitting'
+  match 'sitting-switch', to: 'seats#sitting_switch', as: 'sitting_switch'
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  # Sessions
+  match 'auth', to: 'sessions#auth', as: 'auth'
+  match 'sign-in', to: 'sessions#new', as: 'sign_in'
+  match 'sign-out', to: 'sessions#destroy', as: 'sign_out'
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # Tables
+  match 'start', to: 'tables#start', as: 'start'
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # Users
+  match 'update-location', to: 'users#update_location', as: 'update_location'
 
-  # See how all your routes lay out with "rake routes"
+  match '*url' , to: 'seats#explore', as: 'page_not_found'
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

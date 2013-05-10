@@ -1,0 +1,3 @@
+<% seats.each do |seat| %>
+  <%= render partial: 'tables/table', object: seat.table, as: :table %>
+<% end %>

@@ -1,0 +1,4 @@
+$('.notification').each(function() {
+  $(this).addClass('viewed');
+});
+$('.news_alert').html('<%= j render partial: "notifications/news_alert" %>');

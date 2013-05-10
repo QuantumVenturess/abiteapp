@@ -1,0 +1,34 @@
+<div class="notification link <%= 'viewed' if notification.viewed %>" href="<%= url_for forward_notification_path(notification) %>">
+  <div class="image">
+    <% if notification.seat %>
+      <%= image_tag 'lazy.jpg', 'data-original' => notification.seat.user.photo, class: 'lazyLoad' %>
+    <% elsif notification.message %>
+      <%= image_tag 'lazy.jpg', 'data-original' => notification.message.room.table.place.photo, class: 'lazyLoad' %>
+    <% elsif notification.table %>
+      <% if notification.table.place.image_url %>
+        <%= image_tag 'lazy.jpg', 'data-original' => notification.table.place.photo, class: 'lazyLoad' %>
+      <% else %>
+        <%= image_tag 'place.png' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="info">
+    <div class="message">
+      <p>
+        <% if notification.seat %>
+          <%= notification.seat.user.first_name %> sat down at
+          <%= notification.seat.table.place.name %>
+        <% elsif notification.message %>
+          New message for table at 
+          <%= notification.message.room.table.place.name %>
+        <% elsif notification.table %>
+          <%= notification.table.place.name %> table is ready
+        <% end %>
+      </p>
+    </div>
+    <div class="timestamp">
+      <%= time_ago_in_words(notification.created_at) %> ago
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

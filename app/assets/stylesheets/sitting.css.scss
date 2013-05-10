@@ -1,0 +1,41 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.sitting {
+  .switch {
+    border-bottom: 1px solid rgb(120, 120, 120);
+    border-top: 1px solid rgb(120, 120, 120);
+    @include browser(box-orient, horizontal);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    div {
+      @include browser(box-sizing, border-box);
+      width: 50%;
+      color: rgb(160, 160, 160);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px;
+      text-align: center;
+      &.active {
+        color: rgb(207, 4, 4);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &.readySwitch {
+        border-right: 1px solid rgb(120, 120, 120);
+      }
+    }
+  }
+  .ready, .waiting {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+}

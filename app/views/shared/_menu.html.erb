@@ -1,0 +1,40 @@
+<% if signed_in? %>
+  <div class="menu_panel">
+    <div class="title">
+      <%= image_tag 'back.png', class: 'back' %>
+      Menu
+    </div>
+    <ul>
+      <li class="link" href="<%= url_for current_user %>">
+        <div class="holder">
+          <div class="image">
+            <%= image_tag 'lazy.jpg', 'data-original' => current_user.photo, class: 'lazyLoad' %>
+          </div>
+          <div class="label">
+            Profile
+          </div>
+          </div>
+      </li>
+      <li class="link" href="<%= url_for about_path %>">
+        <div class="holder">
+          <div class="image">
+            <%= image_tag 'about.png' %>
+          </div>
+          <div class="label">
+            About
+          </div>
+        </div>
+      </li>
+      <li class="link" href="<%= url_for sign_out_path %>">
+        <div class="holder">
+          <div class="image">
+            <%= image_tag 'sign_out.png' %>
+          </div>
+          <div class="label">
+            Sign out
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+<% end %>

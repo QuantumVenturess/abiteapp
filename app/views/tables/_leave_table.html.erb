@@ -1,0 +1,5 @@
+<% if current_user && current_user.sitting?(@table) %>
+  <%= form_tag current_user.seat_at_table(@table), method: :delete, remote: true do %>
+    <%= button_tag 'Leave Table' %>
+  <% end %>
+<% end %>

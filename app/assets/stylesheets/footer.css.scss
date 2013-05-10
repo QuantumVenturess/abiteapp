@@ -1,0 +1,70 @@
+footer {
+  background: rgb(60, 60, 60);
+  height: 49px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  .footer {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 640px;
+    .tabbar {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      height: 100%;
+      width: 100%;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -ms-box-align: center;
+      box-align: center;
+      -webkit-box-orient: horizontal;
+      -moz-box-orient: horizontal;
+      -ms-box-orient: horizontal;
+      box-orient: horizontal;
+      .active {
+        background: rgb(40, 40, 40);
+      }
+      .tabitem {
+        height: 100%;
+        text-align: center;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -ms-box-flex: 1;
+        box-flex: 1;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        .image {
+          height: 28px;
+          margin: 0 auto;
+          padding: 3px 0;
+          width: 28px;
+          img {
+            max-height: 28px;
+            max-width: 28px;
+          }
+        }
+        p {
+          color: rgb(255, 255, 255);
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 13px;
+        }
+      }
+    }
+  }
+  .news_alert {
+    color: rgb(255, 26, 0);
+    float: right;
+    font-size: 18px;
+    font-weight: 700;
+    height: 0;
+    margin: 0 -20px 0 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+}

@@ -1,0 +1,51 @@
+<div class="place_result">
+  <div>
+    <div class="image">
+      <% if place['image_url'] %>
+        <%= image_tag 'lazy.jpg', 'data-original' => place['image_url'], class: 'lazyLoad' %>
+      <% else %>
+        <%= image_tag 'place.png' %>
+      <% end %>
+    </div>
+    <div class="title">
+      <div class="name">
+        <p>
+          <%= place['name'] %>
+        </p>
+      </div>
+      <div class="rating">
+        <p>
+          <% if place['rating'] %>
+            <%= place['rating'].to_s.split('.0')[0] %>/5
+          <% else %>
+            0/5
+          <% end %>
+          (<%= pluralize(place['review_count'], 'review') %>)
+        </p>
+      </div>
+      <div class="location">
+        <p>
+          <% if place['location']['address'] && !place['location']['address'].empty? %>
+            <%= place['location']['address'][0] %>,
+          <% end %>
+          <%= place['location']['city'] %>, 
+          <%= place['location']['state_code'] %>
+          <%= place['location']['postal_code'] %>
+        </p>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="table_form">
+    <%= form_tag places_path, method: :post do %>
+      <%= render partial: 'places/place_fields', object: place, as: :place %>
+      <div class="action">
+        <%= button_tag 'Start' %>
+      </div>
+      <div class="field">
+        <%= text_field_tag :max_seats, '', placeholder: 'Max seats', autocomplete: 'off' %>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>

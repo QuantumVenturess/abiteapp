@@ -1,0 +1,9 @@
+<div class="user_seat link" id="userSeat_<%= user.id %>" href="<%= url_for user %>">
+  <div class="user_seat_image">
+    <%= image_tag 'lazy.jpg', 'data-original' => user.photo, class: 'lazyLoad' %>
+  </div>
+  <div class="name">
+    <%= user.name %>
+  </div>
+  <div class="clear"></div>
+</div>

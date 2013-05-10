@@ -1,0 +1,16 @@
+<div class="header">
+  <% if signed_in? %>
+    <div class="menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  <% end %>
+  <div class="logo">
+    <% if @nav_title %>
+      <p><%= @nav_title %></p>
+    <% else %>
+      <%= image_tag 'logo.png' %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  border: 1px solid rgb(160, 160, 160);
+  @include browser(border-radius, 0);
+  @include browser(box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+  @include browser(box-sizing, border-box);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  &:focus {
+    border: 1px solid rgb(80, 80, 80);
+  }
+}
+textarea {
+  height: 60px;
+  resize: none;
+  padding: 5px;
+  vertical-align: bottom;
+}
+button {
+  background: rgb(230, 230, 230);
+  &:active {
+    background: rgb(235, 235, 235);
+  }
+}
+.cancelForm {
+  background: rgb(220, 220, 220);
+}
+button, .cancelForm {
+  @include browser(box-sizing, border-box);
+  border: 1px solid rgb(160, 160, 160);
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
+}

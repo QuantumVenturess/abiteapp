@@ -1,0 +1,64 @@
+/* Table seats */
+.tables {
+  .table {
+    .seats {
+      margin: 10px 0 0 0;
+      .seat {
+        float: left;
+        height: 40px;
+        overflow: hidden;
+        width: 60px;
+        img {
+          max-width: 60px;
+        }
+        .empty {
+
+        }
+      }
+    }
+  }
+}
+
+/* User seats */
+.table_show {
+  .join {
+    margin: 10px 0 0 0;
+  }
+  .seats, .leave_table {
+    margin: 10px 0 0 0;
+  }
+  .seats {
+    margin: 10px 0 0 0;
+    h1 {
+      border-bottom: 1px solid rgb(160, 160, 160);
+      border-top: 1px solid rgb(160, 160, 160);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 13px;
+      margin: 0 0 10px 0;
+      padding: 10px 0;
+    }
+    .user_seat {
+      margin: 0 0 10px 0;
+      &:last-child {
+        margin: 0;
+      }
+      .user_seat_image {
+        float: left;
+        height: 38px;
+        overflow: hidden;
+        text-align: center;
+        width: 38px;
+        img {
+          max-height: 38px;
+        }
+      }
+      .name {
+        float: left;
+        font-size: 14px;
+        line-height: 38px;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+}

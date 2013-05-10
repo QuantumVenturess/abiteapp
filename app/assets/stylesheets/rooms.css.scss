@@ -1,0 +1,51 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.room {
+  .panel {
+    border-bottom: 1px solid rgb(120, 120, 120);
+    border-top: 1px solid rgb(120, 120, 120);
+    @include browser(box-orient, horizontal);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    .viewTable, .markComplete {
+      @include browser(box-sizing, border-box);
+      width: 50%;
+      a {
+        color: rgb(120, 120, 120);
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+      }
+      p {
+        color: rgb(200, 200, 200);
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+      }
+    }
+    .viewTable {
+      border-right: 1px solid rgb(120, 120, 120);
+    }
+  }
+  h1 {
+    border-bottom: 1px solid rgb(120, 120, 120);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+  }
+}

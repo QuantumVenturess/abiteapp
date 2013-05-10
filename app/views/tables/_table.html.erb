@@ -1,0 +1,42 @@
+<div class="table link" id="table_<%= table.id %>" href="<%= url_for((current_user.sitting?(table) && table.room) ? table.room : table) %>">
+  <div>
+    <div class="image">
+      <%= image_tag 'lazy.jpg', 'data-original' => table.place.photo, class: 'lazyLoad' %>
+    </div>
+    <div class="title">
+      <div class="name">
+        <p>
+          <%= table.place.name %>
+        </p>
+      </div>
+      <div class="rating">
+        <p>
+          <% if table.place.rating %>
+            <%= table.place.rating.to_s.split('.0')[0] %>/5
+          <% else %>
+            0/5
+          <% end %>
+          (<%= pluralize(table.place.review_count, 'review') %>)
+        </p>
+      </div>
+      <div class="location">
+        <p>
+          <% if table.place.address && !table.place.address.empty? %>
+            <%= table.place.address %>,
+          <% end %>
+          <%= table.place.city %>, 
+          <%= table.place.state_code %>
+          <%= table.place.postal_code %>
+        </p>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="seats">
+    <% table.seats.order('created_at ASC').each do |seat| %>
+      <%= render partial: 'seats/seat', object: seat %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+  <%= render partial: 'tables/join_table', object: table, as: :table %>
+</div>

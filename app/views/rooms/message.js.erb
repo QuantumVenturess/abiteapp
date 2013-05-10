@@ -1,0 +1,7 @@
+$('.messages').append('<%= j render partial: "messages/message", 
+  locals: { message: @message, user: current_user } %>');
+$('.messageForm').html('<%= j render partial: "messages/form", 
+  object: @room %>');
+
+$('textarea').autoResize();
+$('html, body').animate({ scrollTop: $(document).height() + 1000 }, 0);

@@ -1,0 +1,55 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background: rgb(240, 240, 240);
+  color: rgb(40, 40, 40);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  &.grayBackground {
+    background: rgb(80, 80, 80);
+  }
+  &.imageBackground {
+    background-image: url('bg.jpg');
+    background-size: cover;
+  }
+}
+
+.wrapper {
+  display: none;
+  overflow: hidden;
+  padding: 44px 0 49px 0;
+  position: relative;
+  .content {
+    margin: 0 auto;
+    max-width: 640px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: rgb(48, 157, 227);
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+.clear {
+  clear: both;
+  font-size: 1px;
+  height: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}

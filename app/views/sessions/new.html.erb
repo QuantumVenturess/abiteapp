@@ -1,0 +1,14 @@
+<%= content_for :body_class do %>
+  imageBackground
+<% end %>
+<div class="signIn">
+  <div class="biteImage">
+    <%= image_tag 'bite_image3.png' %>
+  </div>
+  <div class="biteLogo">
+    <%= image_tag 'logo.png' %>
+  </div>
+  <div class="intro">
+  <h1>Never eat alone</h1>
+  <%= render partial: 'shared/facebook_auth' %>
+</div>

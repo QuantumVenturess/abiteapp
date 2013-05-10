@@ -1,0 +1,31 @@
+$marginPercent: 10%;
+
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -ms-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+.facebookAuth {
+  margin: $marginPercent 0 0 0;
+  width: 100%;
+  a {
+    background: rgb(71, 110, 163);
+    color: rgb(255, 255, 255);
+    display: block;
+    text-decoration: none;
+    img {
+      float: left;
+      max-height: 30px;
+      max-width: 30px;
+      padding: 8px 20px 8px 10px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 16px;
+      padding: 15px 0;
+      @include calc(padding-left, "50% - 64px");
+    }
+  }
+}

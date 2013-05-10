@@ -1,0 +1,51 @@
+<div class="table_show">
+  <div class="image">
+    <%= image_tag 'lazy.jpg', 'data-original' => @place.photo, class: 'lazyLoad' %>
+  </div>
+  <div class="title">
+    <div class="name">
+      <%= @place.name %>
+    </div>
+    <div class="rating">
+      <% if @place.rating %>
+        <%= @place.rating.to_s.split('.0')[0] %>/5
+      <% else %>
+        0/5
+      <% end %>
+      (<%= pluralize(@place.review_count, 'review') %>)
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="info">
+    <% if @place.address && !@place.address.empty? %>
+      <p><%=@place.address %></p>
+    <% end %>
+    <p>
+      <%= @place.city %>,
+      <%= @place.state_code %>
+      <%= @place.postal_code %>
+    </p>
+    <p><%= phone_number(@place.phone) %></p>
+  </div>
+  <% if !@table.complete %>
+    <div class="joinTable">
+      <%= render partial: 'tables/join_table', object: @table, locals: { table: @table } %>
+    </div>
+  <% end %>
+  <div class="seats">
+    <h1>
+      People sitting
+      <span><%= @table.seats.size %> out of <%= @table.max_seats %><span>
+    </h1>
+    <% @table.seats.order('created_at ASC').each do |seat| %>
+      <%= render partial: 'seats/user_seat', object: seat.user, as: :user %>
+    <% end %>
+  </div>
+  <% if @table.complete %>
+    <%= link_to 'Message Room', @table.room, class: 'messageRoom' %>
+  <% else %>
+    <div class="leave_table">
+      <%= render partial: 'tables/leave_table' %>
+    </div>
+  <% end %>
+</div>

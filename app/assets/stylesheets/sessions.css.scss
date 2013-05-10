@@ -1,0 +1,35 @@
+$dimensionPercent: 60%;
+$marginPercent: 10%;
+$halfMarginPercent: 5%;
+
+.signIn {
+  padding: 10px;
+  .biteImage {
+    height: $dimensionPercent;
+    margin: 0 auto;
+    text-align: center;
+    width: $dimensionPercent;
+    img {
+      max-height: $dimensionPercent;
+      max-width: $dimensionPercent;
+    }
+  }
+  .biteLogo {
+    height: $dimensionPercent;
+    margin: $marginPercent auto 0 auto;
+    text-align: center;
+    width: $dimensionPercent;
+    img {
+      max-height: $dimensionPercent;
+      max-width: $dimensionPercent;
+    }
+  }
+  h1 {
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+    margin: $marginPercent 0 0 0;
+    text-align: center;
+  }
+}

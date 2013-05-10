@@ -1,0 +1,25 @@
+// Insert data into page
+$('.tables').append('<%= j render partial: "tables/table", 
+  collection: @tables %>');
+// Remove and add pagination
+<% if @tables.num_pages == @tables.current_page %>
+  $('.page').remove();
+<% else %>
+  $('.page').html('<%= j render partial: "shared/pagination", 
+    object: @tables, as: :objects %>');
+<% end %>
+// Lazy load
+$('.lazy').lazyload({
+  failure_limit: 50,
+  skip_invisible: false
+});
+$('.lazyLoad').lazyload({
+  event: 'load',
+  failure_limit: 50
+});
+// Links
+$('.link').click(function() {
+  if ($(this).attr('href')) {
+    window.location = $(this).attr('href');
+  };
+});

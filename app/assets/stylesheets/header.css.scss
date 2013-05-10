@@ -1,0 +1,50 @@
+header {
+  background-color: rgb(207, 4, 4);
+  height: 44px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  .header {
+    margin: 0 auto;
+    max-width: 640px;
+    .logo {
+      display: block;
+      height: 44px;
+      margin: 0 auto;
+      padding: 0 10px;
+      text-align: center;
+      text-decoration: none;
+      width: 60%;
+      img {
+        padding: 10px 0;
+        max-height: 24px;
+        max-width: 60px;
+      }
+      p {
+        color: rgb(255, 255, 255);
+        font-size: 24px;
+        height: 44px;
+        line-height: 44px;
+        overflow: hidden;
+      }
+    }
+    .menu {
+      float: right;
+      height: 24px;
+      margin: 10px;
+      width: 24px;
+      &:hover {
+        cursor: pointer;
+      }
+      .bar {
+        background: rgb(255, 255, 255);
+        height: 4px;
+        margin: 0 0 6px 0;
+      }
+      .bar:last-child {
+        margin: 0;
+      }
+    }
+  }
+}

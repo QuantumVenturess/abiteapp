@@ -1,0 +1,45 @@
+<%= content_for :start_class do %>
+  active
+<% end %>
+<% if !params[:term] %>
+  <%= content_for :head do %>
+    <script>
+      $(document).ready(function() {
+        // Check for geolocation support
+        if (navigator.geolocation) {
+          // Use method getCurrentPosition to get coordinates
+          navigator.geolocation.getCurrentPosition(function (position) {
+            // Access them accordingly
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            $.ajax({
+              data: { latitude: lat, longitude: lon },
+              dataType: 'script',
+              type: 'GET',
+              url: "<%= update_location_path %>"
+            });
+          });
+        };
+      });
+    </script>
+  <% end %>
+<% end %>
+<div class="place_search">
+  <%= form_tag start_path, remote: true do  %>
+    <div class="field">
+      <%= text_field_tag :term, params[:term], placeholder: 'Name of place', autocomplete: 'off' %>
+    </div>
+    <div>
+      <div class="field location">
+        <%= text_field_tag :location, @location, placeholder: 'Current location', autocomplete: 'off' %>
+      </div>
+      <div class="action">
+        <%= button_tag 'Search' %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+</div>
+<div class="place_results">
+  <%= render partial: 'places/search_results', object: @results %>
+</div>

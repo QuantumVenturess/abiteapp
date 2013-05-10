@@ -1,0 +1,108 @@
+/* Place results and tables */
+.place_result, .table {
+  border-top: 1px solid rgb(120, 120, 120);
+  font-size: 14px;
+  line-height: 17px;
+  padding: 20px 10px;
+  .image {
+    float: left;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    img {
+      max-height: 60px;
+      max-width: 60px;
+    }
+  }
+  .title {
+    margin: 0 0 0 70px;
+    .name, .rating, .location {
+      height: 20px;
+      line-height: 20px;
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+    .name, .location {
+      color: rgb(40, 40, 40);
+    }
+    .name {
+      font-weight: 700;
+    }
+    .rating {
+      color: rgb(160, 160, 160);
+    }
+  }
+}
+
+/* Tables */
+.tables {
+  .table {
+    &:first-child {
+      border: none;
+    }
+    a {
+      display: block;
+      padding: 20px 10px;
+      text-decoration: none;
+    }
+    .join {
+      margin: 10px 0 0 0;
+    }
+  }
+}
+
+/* Tables detail */
+.table_show {
+  padding: 10px;
+  .image {
+    float: left;
+    height: 100px;
+    text-align: center;
+    width: 100px;
+    img {
+      max-height: 100px;
+      max-width: 100px;
+    }
+  }
+  .title {
+    height: 100px;
+    margin: 0 0 0 110px;
+    overflow: hidden;
+    .name {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 25px;
+    }
+    .rating {
+      color:  rgb(160, 160, 160);
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+  .info {
+    margin: 10px 0 0 0;
+    p {
+      font-size: 14px;
+      line-height: 21px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  .messageRoom {
+    background: rgb(235, 235, 235);
+    border: 1px solid rgb(160, 160, 160);
+    display: block;
+    color: rgb(40, 40, 40);
+    font-size: 14px;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+}

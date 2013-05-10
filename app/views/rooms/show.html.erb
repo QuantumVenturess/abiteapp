@@ -1,0 +1,28 @@
+<%= content_for :head do %>
+  <script>
+    $(window).load(function() {
+      $('html, body').animate({ scrollTop: $(document).height() + 1000 }, 0);
+    })
+  </script>
+<% end %>
+<div class="room">
+  <div class="panel">
+    <div class="viewTable">
+      <%= link_to 'View Table', @room.table %>
+    </div>
+    <div class="markComplete">
+      <% if current_user.already_marked_complete?(@room.table) %>
+        <p>Mark Complete</p>
+      <% else %>
+        <%= link_to 'Mark Complete', mark_complete_table_path(@room.table) %>
+      <% end %>
+    </div>
+  </div>
+  <h1><%= @room.table.place.name %></h1>
+  <div class="messages">
+    <%= render @messages %>
+  </div>
+  <div class="messageForm">
+    <%= render partial: 'messages/form' %>
+  </div>
+</div>
