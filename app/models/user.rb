@@ -78,23 +78,21 @@ class User < ActiveRecord::Base
   end
 
   def open_graph(action, object)
-    access_token = self.access_token
-    url = ["https://graph.facebook.com/me/permissions?", 
-      "access_token=#{access_token}"].join('')
-    api_call = HTTParty.get(url)
-    results = JSON.parse(api_call.to_json)
-    if results['data'][0]['publish_actions'] == 1
-      if Rails.env.production?
+    if Rails.env.production?
+      access_token = self.access_token
+      url = ["https://graph.facebook.com/me/permissions?", 
+        "access_token=#{access_token}"].join('')
+      api_call = HTTParty.get(url)
+      results = JSON.parse(api_call.to_json)
+      if results['data'][0]['publish_actions'] == 1
         namespace = 'abiteapp'
-      else
-        namespace = 'abiteapp_offline'
+        table = "http://abiteapp.com#{table_path(object)}/permalink"
+        story = ["https://graph.facebook.com/me/#{namespace}:#{action}?", 
+          "access_token=#{access_token}&", 
+          "method=POST&",
+          "table=#{table}"].join('')
+        post = HTTParty.post(story)
       end
-      table = "http://abiteapp.com#{table_path(object)}/permalink"
-      story = ["https://graph.facebook.com/me/#{namespace}:#{action}?", 
-        "access_token=#{access_token}&", 
-        "method=POST&",
-        "table=#{table}"].join('')
-      post = HTTParty.post(story)
     end
   end
 

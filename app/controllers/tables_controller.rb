@@ -25,6 +25,8 @@ class TablesController < ApplicationController
         @table = table
       }
     end
+    # FB open graph action
+    current_user.open_graph('join', table)
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end

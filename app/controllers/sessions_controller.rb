@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     response = HTTParty.get(exchange)
     if response.to_s[/error/]
       flash[:error] = 'Unable to authenticate, please try again'
-      redirect_to root_path
+      redirect_to sign_in_path
     end
     access_token = response.to_s.split('=')[1].split('&')[0]
     api_call = HTTParty.get(
