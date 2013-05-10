@@ -17,19 +17,27 @@ class SeatsController < ApplicationController
         end
       end
     end
+    # Delete table if no one is sitting there
+    if table.seats.size == 0
+      table.destroy
+      flash[:notice] = 'You were the last to leave the table'
+    end
     respond_to do |format|
       format.html {
-        if table.seats.size > 0
+        if table.seats.size == 0
+          redirect_to explore_path
+        else
           flash[:notice] = 'You have left the table'
           redirect_to table
-        else
-          table.destroy
-          flash[:notice] = 'You were the last to leave the table'
-          redirect_to explore_path
         end
       }
       format.js {
-        @table = table
+        if table.seats.size == 0
+          @destroy = true
+        else
+          @destroy = false
+          @table   = table
+        end
       }
     end
   rescue ActiveRecord::RecordNotFound
