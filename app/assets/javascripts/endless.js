@@ -4,10 +4,14 @@ $(document).ready(function() {
     if (next && $(window).scrollTop() > 
         $(document).height() - ($(window).height() + 500)) {
       $('.pagination').remove();
+      $('.spinner').show();
       $.ajax({
         dataType: 'script',
         type: 'GET',
-        url: next
+        url: next,
+        success: function(response) {
+          $('.spinner').hide();
+        }
       });
     };
   });
