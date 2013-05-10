@@ -1,5 +1,5 @@
 class TablesController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, except: :permalink
 
   def join
     table = Table.find(params[:id])
