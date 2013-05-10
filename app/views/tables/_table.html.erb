@@ -1,4 +1,4 @@
-<div class="table link" id="table_<%= table.id %>" href="<%= url_for((current_user.sitting?(table) && table.room) ? table.room : table) %>">
+<div class="table link" id="table_<%= table.id %>" href="<%= url_for((current_user.sitting?(table) && table.ready) ? table.room : table) %>">
   <div>
     <div class="image">
       <%= image_tag 'lazy.jpg', 'data-original' => table.place.photo, class: 'lazyLoad' %>

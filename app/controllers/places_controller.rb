@@ -60,8 +60,11 @@ class PlacesController < ApplicationController
     table.max_seats = max_seats
     table.place_id  = place.id
     table.save
-    seat          = current_user.seats.new
-    seat.table_id = table.id
+    room            = Room.new
+    room.table_id   = table.id
+    room.save
+    seat            = current_user.seats.new
+    seat.table_id   = table.id
     seat.save
     # FB open graph action
     if Rails.env.production?

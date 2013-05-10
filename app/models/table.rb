@@ -37,12 +37,20 @@ class Table < ActiveRecord::Base
     end
   end
 
-  def create_notifications(user)
+  def check_ready
+    if self.seats.size >= self.max_seats
+      self.date_ready = Time.zone.now
+      self.ready = true
+      self.save
+    end
+  end
+
+  def create_notifications(user, table_seat)
     self.seats.each do |seat|
       # Create notification for user sitting at table
       if seat.user != user
         seat_n = seat.user.notifications.new
-        seat_n.seat_id = seat.id
+        seat_n.seat_id = table_seat.id
         seat_n.save
       end
       # Create notification if table is ready

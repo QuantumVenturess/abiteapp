@@ -39,11 +39,16 @@
   <div class="table_form">
     <%= form_tag places_path, method: :post do %>
       <%= render partial: 'places/place_fields', object: place, as: :place %>
-      <div class="action">
-        <%= button_tag 'Start' %>
-      </div>
-      <div class="field">
-        <%= text_field_tag :max_seats, '', placeholder: 'Max seats', autocomplete: 'off' %>
+      <div class="buttons">
+        <div class="field">
+          <%= text_field_tag :max_seats, '', placeholder: 'Seats', autocomplete: 'off' %>
+        </div>
+        <div class="seatButton" data-value="4">4</div>
+        <div class="seatButton" data-value="6">6</div>
+        <div class="seatButton" data-value="8">8</div>
+        <div class="action">
+          <%= button_tag 'Start' %>
+        </div>
       </div>
     <% end %>
     <div class="clear"></div>

@@ -6,3 +6,8 @@ $('.lazyLoad').each(function() {
   var original = $(this).attr('data-original');
   $(this).attr('src', original);
 });
+// Seat buttons
+$('.table_form .seatButton').click(function() {
+  var value = $(this).attr('data-value');
+  $('.table_form .field input').val(value);
+});
