@@ -8,6 +8,7 @@
 .flash {
   @include browser(box-sizing, border-box);
   font-size: 14px;
+  height: 38px;
   max-width: 640px;
   padding: 10px;
   position: absolute;
@@ -27,5 +28,13 @@
     background: rgb(255, 246, 191);
     border: 1px solid rgb(255, 211, 36);
     color: rgb(81, 71, 33);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  img {
+    float: right;
+    max-height: 18px;
+    max-width: 18px;
   }
 }

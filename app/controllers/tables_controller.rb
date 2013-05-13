@@ -82,7 +82,7 @@ class TablesController < ApplicationController
 
   def start
     @title = @nav_title = 'Start'
-    @location = current_user.location ? 
+    @location = params[:location].nil? ?
       current_user.location : params[:location]
     results = nil
     if params[:term]

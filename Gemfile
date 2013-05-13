@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'oauth'
 gem 'pg'
+gem 'roadie'
 
 
 group :assets do
@@ -22,9 +23,7 @@ group :assets do
 end
 
 group :development do
-  if ENV['os'] != 'Windows_NT'
-    gem 'thin'
-  end
+  
 end
 
 group :production do

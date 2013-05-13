@@ -1,6 +1,19 @@
 class UsersController < ApplicationController
   before_filter :authenticate
 
+  def read_tutorial
+    current_user.read_tutorial = true
+    current_user.save
+    respond_to do |format|
+      format.html {
+        redirect_to root_path
+      }
+      format.js {
+        render nothing: true
+      }
+    end
+  end
+
   def show
     @user  = User.find(params[:id])
     seats  = @user.complete

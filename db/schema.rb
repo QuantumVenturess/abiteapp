@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130510163627) do
+ActiveRecord::Schema.define(:version => 20130513181620) do
 
   create_table "completion_marks", :force => true do |t|
     t.integer  "table_id"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20130510163627) do
     t.string   "slug"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+    t.boolean  "read_tutorial",                   :default => false
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token"
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20130510163627) do
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["location"], :name => "index_users_on_location"
   add_index "users", ["name"], :name => "index_users_on_name"
+  add_index "users", ["read_tutorial"], :name => "index_users_on_read_tutorial"
   add_index "users", ["salt"], :name => "index_users_on_salt"
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
 

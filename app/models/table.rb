@@ -39,9 +39,18 @@ class Table < ActiveRecord::Base
 
   def check_ready
     if self.seats.size >= self.max_seats
-      self.date_ready = Time.zone.now
-      self.ready = true
-      self.save
+      if !self.ready
+        self.date_ready = Time.zone.now
+        self.ready = true
+        self.save
+        self.seats.each do |seat|
+          if Rails.env.production?
+            UserMailer.delay.table_ready(self, seat.user)
+          else
+            UserMailer.table_ready(self, seat.user).deliver
+          end
+        end
+      end
     end
   end
 

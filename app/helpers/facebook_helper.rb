@@ -16,6 +16,14 @@ module FacebookHelper
     end
   end
 
+  def check_permissions(facebook_id, access_token)
+    url = ["https://graph.facebook.com/#{facebook_id}/permissions?", 
+      "access_token=#{access_token}"].join('')
+    api_call = HTTParty.get(url)
+    results = JSON.parse(api_call.to_json)
+    true if results['data'][0]['publish_actions'] == 1
+  end
+
   def facebook_scope
     [
       'email',

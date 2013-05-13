@@ -1,0 +1,61 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -ms-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+.tutorial {
+  background: rgba(0, 0, 0, 0.85);
+  @include browser(border-box, box-sizing);
+  height: 100%;
+  max-width: 640px;
+  position: fixed;
+  width: 100%;
+  z-index: 101;
+  .section {
+    font-size: 15px;
+    height: 100%;
+    line-height: 21px;
+    position: absolute;
+    &.join, &.ready {
+      display: none;
+    }
+    img {
+      @include browser(border-box, box-sizing);
+      @include calc(max-width, "100% - 20px");
+      margin: 54px auto 20px auto;
+      padding: 0 10px;
+    }
+    .info {
+      color: rgb(255, 255, 255);
+      padding: 0 10px;
+    }
+    nav {
+      bottom: 0;
+      position: absolute;
+      width: 100%;
+      div {
+        color: rgb(255, 26, 0);
+        font-weight: 700;
+        padding: 20px;
+        &.prev {
+          float: left;
+        }
+        &.next {
+          float: right;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,11 @@
-$dimensionPercent: 60%;
-$marginPercent: 10%;
-$halfMarginPercent: 5%;
+$dimensionPercent: 55%;
+$marginPercent: 8%;
+$halfMarginPercent: 4%;
 
 .signIn {
-  padding: 10px;
   .biteImage {
     height: $dimensionPercent;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     text-align: center;
     width: $dimensionPercent;
     img {
@@ -24,12 +23,38 @@ $halfMarginPercent: 5%;
       max-width: $dimensionPercent;
     }
   }
-  h1 {
+  .intro {
+    background: rgba(0, 0, 0, 0.5);
     color: rgb(255, 255, 255);
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 30px;
     margin: $marginPercent 0 0 0;
+    padding: 10px;
+    h1 {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 30px;
+      margin: 0;
+      text-align: right;
+    }
+    h2 {
+      font-weight: 700;
+      margin: $halfMarginPercent 0 0 0;
+    }
+    h2, ol {
+      font-size: 14px;
+      line-height: 21px;
+    }
+    ol {
+      margin: 0;
+      padding: 0 0 0 20px;
+    }
+  }
+  .moreAbout {
+    color: rgb(207, 4, 4);
+    display: block;
+    font-size: 14px;
+    margin: 10px 0 0 0;
+    padding: 10px;
     text-align: center;
+    text-decoration: none;
   }
 }

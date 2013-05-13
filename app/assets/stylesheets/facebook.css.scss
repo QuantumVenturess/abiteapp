@@ -1,4 +1,9 @@
-$marginPercent: 10%;
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
 
 @mixin calc($property, $expression) {
   #{$property}: -webkit-calc(#{$expression});
@@ -7,8 +12,12 @@ $marginPercent: 10%;
   #{$property}: calc(#{$expression});
 }
 
+$marginPercent: 8%;
+
 .facebookAuth {
+  @include browser(box-sizing, border-box);
   margin: $marginPercent 0 0 0;
+  padding: 0 10px;
   width: 100%;
   a {
     background: rgb(71, 110, 163);

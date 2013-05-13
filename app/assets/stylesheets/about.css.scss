@@ -1,27 +1,32 @@
-$marginPercent: 10%;
-$halfMarginPercent: 5%;
 $white: rgb(255, 255, 255);
+$marginPercent: 8%;
+$halfMarginPercent: 4%;
 
 .about {
-  padding: 10px;
   h1 {
     color: $white;
     font-size: 24px;
     font-weight: 300;
     line-height: 30px;
     margin: 0;
+    padding: 0 10px;
     text-align: right;
   }
   .intro {
     background: rgba(0, 0, 0, 0.5);
     margin: $marginPercent 0 0 0;
-    padding: $halfMarginPercent;
+    padding: 10px;
     h2 {
+      font-weight: 700;
+      margin: 0 0 5px 0;
+    }
+    h2, p {
       color: $white;
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 22px;
-      margin: 0 0 $halfMarginPercent 0;
+      font-size: 14px;
+      line-height: 21px;
+    }
+    p {
+      margin: 0 0 10px 0;
       &:last-child {
         margin: 0;
       }

@@ -30,7 +30,6 @@ Abiteapp::Application.routes.draw do
   # Pages
   match 'about', to: 'pages#about', as: 'about'
   match 'test', to: 'pages#test', as: 'test'
-  match 'yelp', to: 'pages#yelp', as: 'yelp'
 
   # Seats
   match 'explore', to: 'seats#explore', as: 'explore'
@@ -39,13 +38,14 @@ Abiteapp::Application.routes.draw do
 
   # Sessions
   match 'auth', to: 'sessions#auth', as: 'auth'
-  match 'sign-in', to: 'sessions#new', as: 'sign_in'
+  match 'join', to: 'sessions#new', as: 'sign_in'
   match 'sign-out', to: 'sessions#destroy', as: 'sign_out'
 
   # Tables
   match 'start', to: 'tables#start', as: 'start'
 
   # Users
+  match 'read-tutorial', to: 'users#read_tutorial', as: 'read_tutorial'
   match 'update-location', to: 'users#update_location', as: 'update_location'
 
   match '*url' , to: 'seats#explore', as: 'page_not_found'

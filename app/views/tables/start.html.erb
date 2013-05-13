@@ -26,12 +26,18 @@
 <% end %>
 <div class="place_search">
   <%= form_tag start_path, remote: true do  %>
-    <div class="field">
+    <div class="field placeName">
       <%= text_field_tag :term, params[:term], placeholder: 'Name of place', autocomplete: 'off' %>
+      <div class="clearButton clearPlaceName">
+        Clear name
+      </div>
     </div>
     <div>
       <div class="field location">
         <%= text_field_tag :location, @location, placeholder: 'Current location', autocomplete: 'off' %>
+        <div class="clearButton clearLocation">
+          Clear location
+        </div>
       </div>
       <div class="action">
         <%= button_tag 'Search' %>

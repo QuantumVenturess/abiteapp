@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.12)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.2)
     annotate (2.5.0)
       rake
     arel (3.0.2)
@@ -40,6 +41,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    css_parser (1.2.6)
+      addressable
+      rdoc
     daemons (1.1.9)
     dalli (2.6.0)
     delayed_job (3.0.1)
@@ -79,6 +83,7 @@ GEM
     multi_json (1.7.3)
     multi_xml (0.4.2)
     newrelic_rpm (3.5.4.34)
+    nokogiri (1.5.2-x86-mingw32)
     oauth (0.4.5)
     pg (0.14.1)
     pg (0.14.1-x86-mingw32)
@@ -115,6 +120,11 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    roadie (2.3.1)
+      actionmailer (> 3.0.0, < 3.3.0)
+      css_parser
+      nokogiri (>= 1.4.4)
+      sprockets
     sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -158,6 +168,7 @@ DEPENDENCIES
   oauth
   pg
   rails (= 3.2.12)
+  roadie
   sass-rails (~> 3.2.3)
   thin
   uglifier (>= 1.0.3)
