@@ -35,7 +35,6 @@
 </head>
 <body class="<%= yield :body_class %>">
   <% if signed_in? %>
-    <%= render 'shared/tutorial' if !current_user.read_tutorial? %>
     <header>
       <%= render 'layouts/header' %>
     </header>
