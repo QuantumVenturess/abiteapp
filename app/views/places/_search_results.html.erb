@@ -2,4 +2,7 @@
   <% @results.each do |place| %>
     <%= render partial: 'places/result', object: place, as: :place %>
   <% end %>
+  <div class="yelpLogo">
+    <%= image_tag 'yelp_logo.png' %>
+  </div>
 <% end %>

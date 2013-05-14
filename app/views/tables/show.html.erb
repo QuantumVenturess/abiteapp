@@ -7,12 +7,8 @@
       <%= @place.name %>
     </div>
     <div class="rating">
-      <% if @place.rating %>
-        <%= @place.rating.to_s.split('.0')[0] %>/5
-      <% else %>
-        0/5
-      <% end %>
-      (<%= pluralize(@place.review_count, 'review') %>)
+      <div class="yelpReviews <%= yelp_rating_to_class(@place.rating) %>"></div>
+      <%= pluralize(@place.review_count, 'review') %>
     </div>
   </div>
   <div class="clear"></div>

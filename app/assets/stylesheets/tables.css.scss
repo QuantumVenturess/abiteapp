@@ -16,7 +16,7 @@
   }
   .title {
     margin: 0 0 0 70px;
-    .name, .rating, .location {
+    .name, .location {
       height: 20px;
       line-height: 20px;
       p {
@@ -32,8 +32,53 @@
     .name {
       font-weight: 700;
     }
-    .rating {
-      color: rgb(160, 160, 160);
+  }
+}
+
+/* Yelp ratings */
+.place_result, .table, .table_show {
+  .rating {
+    color: rgb(160, 160, 160);
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    .yelpReviews {
+      background-image: url('yelp_reviews.png');
+      float: left;
+      height: 16px;
+      margin: 2px 5px 2px 0;
+      overflow: hidden;
+      width: 84px;
+      &.zero {
+        background-position: 0 0;
+      }
+      &.one {
+        background-position: 0 -19px;
+      }
+      &.onePointFive {
+        background-position: 0 -38px;
+      }
+      &.two {
+        background-position: 0 -57px;
+      }
+      &.twoPointFive {
+        background-position: 0 -76px;
+      }
+      &.three {
+        background-position: 0 -95px;
+      }
+      &.threePointFive {
+        background-position: 0 -114px;
+      }
+      &.four {
+        background-position: 0 -133px
+      }
+      &.fourPointFive {
+        background-position: 0 -152px
+      }
+      &.five {
+        background-position: 0 -171px;
+      }
     }
   }
 }
@@ -76,11 +121,6 @@
       font-size: 18px;
       font-weight: 700;
       line-height: 25px;
-    }
-    .rating {
-      color:  rgb(160, 160, 160);
-      font-size: 14px;
-      line-height: 21px;
     }
   }
   .info {

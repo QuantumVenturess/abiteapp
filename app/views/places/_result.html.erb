@@ -14,14 +14,8 @@
         </p>
       </div>
       <div class="rating">
-        <p>
-          <% if place['rating'] %>
-            <%= place['rating'].to_s.split('.0')[0] %>/5
-          <% else %>
-            0/5
-          <% end %>
-          (<%= pluralize(place['review_count'], 'review') %>)
-        </p>
+        <div class="yelpReviews <%= yelp_rating_to_class(place['rating']) %>"></div>
+        <p><%= pluralize(place['review_count'], 'review') %></p>
       </div>
       <div class="location">
         <p>
