@@ -39,9 +39,21 @@ $(document).ready(function() {
     clearPlaceName.hide();
   });
   // Typing in the search box returns results
-  $('.place_search .placeName input').keyup(function() {
-    var location = $('.place_search .location input').val();
-    var term = $(this).val();
+  var typingTimer;
+  var doneTypingInterval = 500;
+  var search = $('.place_search .placeName input');
+  search.keyup(function() {
+    typingTimer = setTimeout(doneTypingSearch, doneTypingInterval);
+  });
+  search.keydown(function() {
+    clearTimeout(typingTimer);
+  });
+});
+
+function doneTypingSearch() {
+  var location = $('.place_search .location input').val();
+  var term = $('.place_search .placeName input').val();
+  if (term != '') {
     $.ajax({
       data: {
         location: location,
@@ -50,5 +62,5 @@ $(document).ready(function() {
       dataType: 'script',
       type: 'GET'
     });
-  });
-});
+  };
+};
