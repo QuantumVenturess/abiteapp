@@ -28,7 +28,7 @@ class TablesController < ApplicationController
     # FB open graph action
     if Rails.env.production?
       current_user.delay(queue: 'open_graph', 
-        priority: 9).open_graph('join', table)
+        priority: 10).open_graph('join', table)
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path

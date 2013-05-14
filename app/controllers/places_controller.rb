@@ -73,9 +73,9 @@ class PlacesController < ApplicationController
     # FB open graph action
     if Rails.env.production?
       place.delay(queue: 'save_image', 
-        priority: 3).save_image
+        priority: 0).save_image
       current_user.delay(queue: 'open_graph', 
-        priority: 2).open_graph('start', table)
+        priority: 10).open_graph('start', table)
     else
       place.save_image
     end
