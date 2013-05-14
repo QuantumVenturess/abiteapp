@@ -128,7 +128,8 @@ class User < ActiveRecord::Base
 
   def tables_not_sitting
     seat_ids = 
-      self.seats.select(:table_id).map { |seat| seat.table_id }.join(', ')
+      self.seats.select(
+        :table_id).map { |seat| seat.table_id }.append(0).join(', ')
     Table.waiting.where("id NOT IN (#{seat_ids})").order('created_at DESC')
   end
 
