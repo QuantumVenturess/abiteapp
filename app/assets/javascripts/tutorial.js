@@ -2,7 +2,7 @@ $(document).ready(function() {
   var start = $('.tutorial .start');
   var join  = $('.tutorial .join');
   var ready = $('.tutorial .ready');
-  var duration = 200;
+  var duration = 300;
   $('.tutorial .start .next').click(function() {
     start.hide('slide', { direction: 'left' }, duration);
     join.show('slide', { direction: 'right' }, duration);

@@ -126,6 +126,12 @@ class User < ActiveRecord::Base
     self.tables.size
   end
 
+  def tables_not_sitting
+    seat_ids = 
+      self.seats.select(:table_id).map { |seat| seat.table_id }.join(', ')
+    Table.waiting.where("id NOT IN (#{seat_ids})").order('created_at DESC')
+  end
+
   def token
     if self.access_token
       at = self.access_token

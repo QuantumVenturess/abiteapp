@@ -13,13 +13,17 @@
 }
 
 .tutorial {
-  background: rgba(0, 0, 0, 0.85);
-  @include browser(border-box, box-sizing);
-  height: 100%;
+  margin: 0 auto;
   max-width: 640px;
-  position: fixed;
-  width: 100%;
-  z-index: 101;
+  .sections {
+    background: rgba(0, 0, 0, 0.85);
+    @include browser(border-box, box-sizing);
+    height: 100%;
+    max-width: 640px;
+    position: fixed;
+    width: 100%;
+    z-index: 101;
+  }
   .section {
     font-size: 15px;
     height: 100%;

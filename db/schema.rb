@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513181620) do
+ActiveRecord::Schema.define(:version => 20130514061020) do
 
   create_table "completion_marks", :force => true do |t|
     t.integer  "table_id"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130513181620) do
     t.float    "longitude",    :default => 0.0
     t.float    "rating",       :default => 0.0
     t.integer  "review_count", :default => 0
+    t.string   "s3_url"
   end
 
   add_index "places", ["address"], :name => "index_places_on_address"
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20130513181620) do
   add_index "places", ["postal_code"], :name => "index_places_on_postal_code"
   add_index "places", ["rating"], :name => "index_places_on_rating"
   add_index "places", ["review_count"], :name => "index_places_on_review_count"
+  add_index "places", ["s3_url"], :name => "index_places_on_s3_url"
   add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
   add_index "places", ["state_code"], :name => "index_places_on_state_code"
   add_index "places", ["yelp_id"], :name => "index_places_on_yelp_id", :unique => true

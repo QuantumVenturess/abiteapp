@@ -3,17 +3,18 @@ $marginPercent: 8%;
 $halfMarginPercent: 4%;
 
 .about {
+  height: 100%;
   h1 {
     color: $white;
     font-size: 24px;
     font-weight: 300;
     line-height: 30px;
-    margin: 0;
+    margin: $marginPercent 0 0 0;
     padding: 0 10px;
     text-align: right;
   }
   .intro {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     margin: $marginPercent 0 0 0;
     padding: 10px;
     h2 {

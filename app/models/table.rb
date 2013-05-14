@@ -28,6 +28,8 @@ class Table < ActiveRecord::Base
   has_many :seats, dependent: :destroy
   has_one :room, dependent: :destroy
 
+  scope :waiting, where(complete: false, ready: false)
+
   def calculate_completion
     threshold = (self.max_seats / 2.0).floor + 1
     if self.completion_marks.size >= threshold

@@ -1,8 +1,16 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
 $dimensionPercent: 55%;
 $marginPercent: 8%;
 $halfMarginPercent: 4%;
 
 .signIn {
+  height: 100%;
   .biteImage {
     height: $dimensionPercent;
     margin: 20px auto 0 auto;
@@ -24,7 +32,7 @@ $halfMarginPercent: 4%;
     }
   }
   .intro {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     color: rgb(255, 255, 255);
     margin: $marginPercent 0 0 0;
     padding: 10px;
@@ -47,14 +55,5 @@ $halfMarginPercent: 4%;
       margin: 0;
       padding: 0 0 0 20px;
     }
-  }
-  .moreAbout {
-    color: rgb(207, 4, 4);
-    display: block;
-    font-size: 14px;
-    margin: 10px 0 0 0;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
   }
 }

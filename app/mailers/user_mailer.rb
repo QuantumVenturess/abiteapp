@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     if Rails.env.production?
       @root_url = 'http://abiteapp.com'
     else
-      if ENV['os'] = 'Windows_NT'
+      if ENV['os'] == 'Windows_NT'
         @root_url = 'http://localhost:3000'
       else
         @root_url = 'http://192.168.1.72:3000'

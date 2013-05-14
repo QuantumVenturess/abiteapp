@@ -46,8 +46,7 @@ class SeatsController < ApplicationController
 
   def explore
     @title = @nav_title = 'Explore'
-    @tables = Table.where('complete = ? AND ready = ?', 
-      false, false).order('created_at DESC').page(params[:p])
+    @tables = current_user.tables_not_sitting.page(params[:p])
     respond_to do |format|
       format.html
       format.js

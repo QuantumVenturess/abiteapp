@@ -18,6 +18,7 @@ $(document).ready(function() {
   clearLocation.click(function() {
     locationInput.val('');
     locationInput.focus();
+    return false;
   });
   placeNameInput.click(function() {
     clearLocation.hide();
@@ -27,6 +28,11 @@ $(document).ready(function() {
   clearPlaceName.click(function() {
     placeNameInput.val('');
     placeNameInput.focus();
+    return false;
+  });
+  $('a, button').click(function() {
+    clearLocation.hide();
+    clearPlaceName.hide();
   });
   $(document).click(function() {
     clearLocation.hide();
