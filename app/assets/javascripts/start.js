@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 function doneTypingSearch() {
   var location = $('.place_search .location input').val();
-  var term = $('.place_search .placeName input').val();
+  var term     = $('.place_search .placeName input').val();
   if (term != '') {
     $.ajax({
       data: {

@@ -39,6 +39,26 @@ class Table < ActiveRecord::Base
     end
   end
 
+  def calculate_completion_proximity(lat, lon, user)
+    if lat && lon &&
+       user == self.user && 
+       user.sitting?(self) && 
+       !user.already_marked_complete?(self)
+
+      place_coords = [self.place.latitude, self.place.longitude]
+      user_coords  = [lat.to_f, lon.to_f]
+      miles = Geocoder::Calculations.distance_between(place_coords, user_coords)
+      if miles <= 0.5
+        completion_mark = user.completion_marks.new
+        completion_mark.table_id = self.id
+        completion_mark.save
+        self.complete = true
+        self.date_complete = Time.zone.now
+        self.save
+      end
+    end
+  end
+
   def check_ready
     if self.seats.size >= self.max_seats
       if !self.ready

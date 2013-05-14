@@ -12,6 +12,9 @@ $('.table_show .leave_table').html(
 // Insert user seat table show
 $('.table_show .seats').append('<%= j render partial: "seats/user_seat", 
   object: current_user, as: :user %>');
+// Insert message room button
+$('.table_show .messageRoomButton').html(
+  '<%= j render "tables/message_room" %>');
 
 // Explore
 // Remove join table form from explore

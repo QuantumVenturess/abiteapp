@@ -42,12 +42,14 @@
   <% end %>
   <div class="wrapper">
     <div class="content">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>">
-          <%= image_tag 'close.png' %>
-          <%= value %>
-        </div>
-      <% end %> 
+      <div class="flashMessage">
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>">
+            <%= image_tag 'close.png' %>
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
   </div>

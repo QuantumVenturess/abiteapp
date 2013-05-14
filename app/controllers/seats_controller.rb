@@ -3,22 +3,30 @@ class SeatsController < ApplicationController
 
   def destroy
     seat = Seat.find(params[:id])
+    seat_user = seat.user
     table = seat.table
     seat.destroy
+    # If there was more than 1 user at the table
     if table.seats.size > 0
+      # If table was ready, delete the notifications about it being ready
       if table.ready
         table.notifications.each do |notification|
           notification.destroy
         end
-        # If only 1 person is left
+        # If only 1 person is left, make table not ready
         if table.max_seats - table.seats.size == 1
           table.ready = false
           table.save
         end
       end
-    end
-    # Delete table if no one is sitting there
-    if table.seats.size == 0
+      # If the table's creator leaves the table, give ownership to next user
+      if table.user == seat_user
+        next_seat = table.seats.order('created_at')[0]
+        table.user_id = next_seat.user.id
+        table.save
+      end
+    # If there are no more users at the table
+    else
       table.destroy
       flash[:notice] = 'You were the last to leave the table'
     end

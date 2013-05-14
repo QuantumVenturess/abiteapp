@@ -12,20 +12,23 @@
             // Access them accordingly
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            $.ajax({
-              data: { latitude: lat, longitude: lon },
-              dataType: 'script',
-              type: 'GET',
-              url: "<%= update_location_path %>"
-            });
+            var ll  = lat.toString() + ',' + lon.toString();
+            // Give results when start page loads
             $.ajax({
               data: { 
-                ll: lat.toString() + ',' + lon.toString(),
+                ll: ll,
                 term: ''
               },
               dataType: 'script',
               type: 'GET',
               url: "<%= start_path %>"
+            });
+            // Update user's location column
+            $.ajax({
+              data: { latitude: lat, longitude: lon },
+              dataType: 'script',
+              type: 'GET',
+              url: "<%= update_location_path %>"
             });
           });
         };

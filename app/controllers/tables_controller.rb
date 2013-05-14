@@ -9,7 +9,12 @@ class TablesController < ApplicationController
     # If all seats filled, mark table as ready
     table.check_ready
     # Create notifications for all users who are sitting at table
-    table.create_notifications(current_user, seat)
+    if Rails.env.production?
+      table.delay(queue: 'table_join_notifications', 
+        priority: 10).create_notifications(current_user, seat)
+    else
+      table.create_notifications(current_user, seat)
+    end
     flash[:success] = 'This table is ready to go' if table.ready
     respond_to do |format|
       format.html {
@@ -36,23 +41,57 @@ class TablesController < ApplicationController
 
   def mark_complete
     table = Table.find(params[:id])
-    if current_user.sitting?(table) && 
-      !current_user.already_marked_complete?(table)
+    lat = params[:lat]
+    lon = params[:lon]
+    respond_to do |format|
+      format.html {
+        redirect_to table.room
+      }
+      format.js {
+        table.calculate_completion_proximity(lat, lon, current_user)
+        @table = table
+        @url   = url_for(table_path(table))
+        if table.complete
+          @key   = 'success'
+          @value = 'Table completed'
+        else
+          @key   = 'error'
+          @value = 'You must be near location to mark complete'
+        end
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to explore_path
+  end
 
-      completion_mark = current_user.completion_marks.new
-      completion_mark.table_id = table.id
-      completion_mark.save
-      table.calculate_completion
+  def mark_complete_old
+    table = Table.find(params[:id])
+    lat = params[:lat]
+    lon = params[:lon]
+    if lat.nil? || lon.nil? || lat.empty? || lon.empty?
+      flash[:error] = 'You must enable GPS to mark complete'
+      redirect_to table.room
+    elsif current_user == table.user && 
+       current_user.sitting?(table) && 
+       !current_user.already_marked_complete?(table)
+
+      # Create completion mark
+      # completion_mark = current_user.completion_marks.new
+      # completion_mark.table_id = table.id
+      # completion_mark.save
+      # table.calculate_completion
+      # table.calculate_completion_proximity(lat, lon)
       if table.complete
         flash[:success] = 'Table complete!'
       else
-        flash[:success] = 'You marked this table as complete'
+        flash[:success] = 'You must be near to mark complete'
       end
       redirect_to table
     elsif table.complete
       flash[:success] = 'This table already completed'
       redirect_to table
     else
+      flash[:error] = 'Table was not marked complete'
       redirect_to explore_path
     end
   rescue ActiveRecord::RecordNotFound
@@ -104,7 +143,7 @@ class TablesController < ApplicationController
       else
         path += "location=#{location}"
       end
-      json = access_token.get(path).body
+      json    = access_token.get(path).body
       results = JSON.parse(json)['businesses']
     end
     respond_to do |format|

@@ -8,12 +8,12 @@ class RoomsController < ApplicationController
       message.content = params[:content]
       message.room_id = room.id
       message.save
-      room.table.seats.each do |seat|
-        if seat.user != message.user
-          notification = seat.user.notifications.new
-          notification.message_id = message.id
-          notification.save
-        end
+      # Create notifications for all users in the room
+      if Rails.env.production?
+        room.delay(queue: 'room_message_notifications', 
+          priority: 10).create_notifications(message)
+      else
+        room.create_notifications(message)
       end
       respond_to do |format|
         format.html {
@@ -26,7 +26,8 @@ class RoomsController < ApplicationController
         }
       end
     else
-      redirect_to sitting_path
+      flash[:notice] = 'You must be seated to message'
+      redirect_to room.table
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to sitting_path

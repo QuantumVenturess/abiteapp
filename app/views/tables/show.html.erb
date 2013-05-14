@@ -37,7 +37,9 @@
       <%= render partial: 'seats/user_seat', object: seat.user, as: :user %>
     <% end %>
   </div>
-  <%= link_to 'Message Room', @table.room, class: 'messageRoom' %>
+  <div class="messageRoomButton">
+    <%= render 'tables/message_room' %>
+  </div>
   <% if !@table.complete && !current_user.already_marked_complete?(@table) %>
     <div class="leave_table">
       <%= render partial: 'tables/leave_table' %>

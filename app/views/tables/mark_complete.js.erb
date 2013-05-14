@@ -1,0 +1,9 @@
+<% if @table.complete %>
+  $('.markComplete').remove();
+<% end %>
+$('.flashMessage').html('<%= j render "shared/flash" %>');
+
+// Flash
+$('.flash').click(function() {
+  $(this).slideUp(100);
+});

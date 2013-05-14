@@ -4,10 +4,12 @@
   // Insert join table form
   $('.joinTable').html('<%= j render partial: "tables/join_table", 
     object: @table, locals: { table: @table } %>');
-  // Remove leave form
-  $('.leave_table form').remove();
   // Remove user's seat
   $('#userSeat_' + <%= current_user.id %>).remove();
+  // Remove leave form
+  $('.leave_table form').remove();
+  // Remove message room button
+  $('.table_show .messageRoomButton a').remove();
   // Update People sitting count
   $('.seats h1 span').text(
     '<%= @table.seats.size %> out of <%= @table.max_seats %>');

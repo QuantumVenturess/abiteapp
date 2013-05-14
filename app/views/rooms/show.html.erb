@@ -6,19 +6,16 @@
   </script>
 <% end %>
 <div class="room">
-  <div class="panel">
-    <div class="viewTable">
-      <%= link_to 'View Table', @room.table %>
+  <% if current_user == @room.table.user && !current_user.already_marked_complete?(@room.table) %>
+    <div class="panel">
+      <div class="markComplete">
+        <div href="<%= mark_complete_table_path(@room.table) %>">
+          Mark Complete
+        </div>
+      </div>
     </div>
-    <div class="markComplete">
-      <% if current_user.already_marked_complete?(@room.table) %>
-        <p>Mark Complete</p>
-      <% else %>
-        <%= link_to 'Mark Complete', mark_complete_table_path(@room.table) %>
-      <% end %>
-    </div>
-  </div>
-  <h1><%= @room.table.place.name %></h1>
+  <% end %>
+  <%= link_to @room.table.place.name, @room.table, class: 'placeName' %>
   <div class="messages">
     <div class="users">
       <% @room.table.seats.order('created_at ASC').each do |seat| %>
