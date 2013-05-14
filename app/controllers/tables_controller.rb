@@ -84,14 +84,13 @@ class TablesController < ApplicationController
     @title = @nav_title = 'Start'
     @location = params[:location].nil? ?
       current_user.location : params[:location]
-    results = nil
     if params[:term]
       consumer = OAuth::Consumer.new(yelp_consumer_key, yelp_consumer_secret, 
         { site: "http://#{yelp_api_host}" })
       access_token = OAuth::AccessToken.new(consumer, yelp_token, 
         yelp_token_secret)
       limit = 10
-      if !params[:location].empty?
+      if params[:location] && !params[:location].empty?
         location = URI.escape(params[:location])
       elsif current_user.location
         location = URI.escape(current_user.location)
@@ -99,7 +98,12 @@ class TablesController < ApplicationController
         location = URI.escape(yelp_default_location)
       end
       term = URI.escape(params[:term])
-      path = "/v2/search?limit=#{limit}&location=#{location}&term=#{term}"
+      path = "/v2/search?term=#{term}&limit=#{limit}&"
+      if params[:ll]
+        path += "ll=#{params[:ll]}"
+      else
+        path += "location=#{location}"
+      end
       json = access_token.get(path).body
       results = JSON.parse(json)['businesses']
     end

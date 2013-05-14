@@ -38,4 +38,17 @@ $(document).ready(function() {
     clearLocation.hide();
     clearPlaceName.hide();
   });
+  // Typing in the search box returns results
+  $('.place_search .placeName input').keyup(function() {
+    var location = $('.place_search .location input').val();
+    var term = $(this).val();
+    $.ajax({
+      data: {
+        location: location,
+        term: term
+      },
+      dataType: 'script',
+      type: 'GET'
+    });
+  });
 });

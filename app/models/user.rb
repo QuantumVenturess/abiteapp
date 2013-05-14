@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
 
   def sitting_waiting
     self.seats.joins(:table).where(tables: 
-      { complete: false, ready: false }).order('created_at DESC')
+      { complete: false }).order('created_at DESC')
   end
 
   def started_count

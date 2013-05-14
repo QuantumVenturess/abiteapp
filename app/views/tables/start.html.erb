@@ -18,6 +18,15 @@
               type: 'GET',
               url: "<%= update_location_path %>"
             });
+            $.ajax({
+              data: { 
+                ll: lat.toString() + ',' + lon.toString(),
+                term: ''
+              },
+              dataType: 'script',
+              type: 'GET',
+              url: "<%= start_path %>"
+            });
           });
         };
       });
