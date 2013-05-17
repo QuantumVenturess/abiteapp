@@ -45,6 +45,7 @@ Abiteapp::Application.routes.draw do
   match 'start', to: 'tables#start', as: 'start'
 
   # Users
+  match 'authenticate/bite-access-token', to: 'users#bite_access_token'
   match 'read-tutorial', to: 'users#read_tutorial', as: 'read_tutorial'
   match 'update-location', to: 'users#update_location', as: 'update_location'
 

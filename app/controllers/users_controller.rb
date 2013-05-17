@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, except: :bite_access_token
+
+  def bite_access_token
+    user = User.find_by_access_token(params[:access_token])
+    token = user ? "#{user.id}00000#{user.token}" : ''
+    render json: token
+  end
 
   def read_tutorial
     current_user.read_tutorial = true
