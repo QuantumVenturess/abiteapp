@@ -38,7 +38,8 @@ class SessionsController < ApplicationController
       user.save
       sign_in user
       redirect_back_or root_path
-    elsif check_permissions(facebook_id, access_token)
+#    elsif check_permissions(facebook_id, access_token)
+    else
       user = User.new(email: email, 
                       first_name: first_name,
                       image: image,
@@ -54,9 +55,9 @@ class SessionsController < ApplicationController
         flash[:error] = 'Unable to create user, please try again'
         redirect_to sign_in_path
       end
-    else
-      flash[:notice] = 'Please allow all permissions'
-      redirect_to sign_in_path
+#    else
+#      flash[:notice] = 'Please allow all permissions'
+#      redirect_to sign_in_path
     end
   end
 
