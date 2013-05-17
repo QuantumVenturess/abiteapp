@@ -37,11 +37,16 @@ module SessionsHelper
 
   def sign_out
     cookies.delete(:remember_token_abiteapp, domain: :all)
+    cookies.delete(:remember_token_ios)
     self.current_user = nil
   end
 
   def signed_in?
-    !current_user.nil?
+    if !current_user.nil?
+      true
+    elsif !User.find_by_access_token(cookies[:remember_token_ios]).nil?
+      true
+    end
   end
 
   private
