@@ -2,9 +2,15 @@ class UsersController < ApplicationController
   before_filter :authenticate, except: :bite_access_token
 
   def bite_access_token
-    user = User.find_by_access_token(params[:access_token])
-    token = user ? "#{user.id}00000#{user.token}" : ''
-    render json: token
+    token = params[:token]
+    partial = Rails.env.production? ? 'CAABni0jB9PYBA' : 'CAACcASj5klYBA'
+    if token && token.split(partial).count == 2
+      facebook_id = token.split(partial)[0]
+      last_name = token.split(partial)[1]
+      user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
+    end
+    bite_token = user ? "#{user.id}00000#{user.token}" : ''
+    render json: bite_token
   end
 
   def read_tutorial
