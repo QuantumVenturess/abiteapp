@@ -10,7 +10,10 @@ class UsersController < ApplicationController
       user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
     end
     bite_token = user ? "#{user.id}00000#{user.token}" : ''
-    render json: bite_token
+    dictionary = {
+      bite_access_token: bite_token
+    }
+    render json: dictionary
   end
 
   def read_tutorial
