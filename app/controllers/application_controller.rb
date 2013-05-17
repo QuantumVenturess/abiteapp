@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include FacebookHelper
   include PlacesHelper
   include SessionsHelper
+  include TablesHelper
   include UsersHelper
   include YelpHelper
 
