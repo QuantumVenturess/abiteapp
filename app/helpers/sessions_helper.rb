@@ -56,7 +56,9 @@ module SessionsHelper
     end
 
     def remember_token
-      cookies.signed[:remember_token_abiteapp] || [nil, nil]
+      cookies.signed[:remember_token_abiteapp] || 
+      [0, cookies[:remember_token_ios]] ||
+      [nil, nil]
     end
 
     def store_location

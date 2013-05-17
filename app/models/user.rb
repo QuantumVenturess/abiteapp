@@ -49,9 +49,11 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate_with_token(id, token)
-    user = User.find(id)
-    if user
-      user.token == token ? user : nil
+    if id == 0
+      User.find_by_access_token(token)
+    else
+      user = User.find(id)
+      user.token == token ? user : nil if user
     end
   rescue ActiveRecord::RecordNotFound
     nil
