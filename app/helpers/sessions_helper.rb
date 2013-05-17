@@ -41,7 +41,7 @@ module SessionsHelper
   end
 
   def signed_in?
-    if !current_user.nil? || params[:bite_access_token]
+    if !current_user.nil?
       true
     end
   end
