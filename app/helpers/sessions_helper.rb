@@ -37,7 +37,6 @@ module SessionsHelper
 
   def sign_out
     cookies.delete(:remember_token_abiteapp, domain: :all)
-    cookies.delete(:remember_token_ios, domain: :all)
     self.current_user = nil
   end
 
@@ -55,12 +54,11 @@ module SessionsHelper
 
     def remember_token
       abiteapp = cookies.signed[:remember_token_abiteapp]
-      ios      = cookies[:remember_token_ios]
+      bite_access_token = params[:bite_access_token]
       if abiteapp && !abiteapp.empty?
         abiteapp
-      elsif ios && !ios.empty?
-        [0, ios]
-        # [0, params[:bite_access_token]]
+      elsif bite_access_token && !bite_access_token.empty?
+        [0, bite_access_token]
       else
         [nil, nil]
       end

@@ -50,17 +50,10 @@ class User < ActiveRecord::Base
 
   def self.authenticate_with_token(id, token)
     if id == 0 && token
-      partial = Rails.env.production? ? 'CAABni0jB9PYBA' : 'CAACcASj5klYBA'
-      if token && token.split(partial).count == 2
-        facebook_id = token.split(partial)[0]
-        token       = token.split(partial)[1]
-        user        = User.find_by_facebook_id(facebook_id)
-      end
-      # id    = token.split('00000')[0]
-      # token = token.split('00000')[1]
-    else
-      user = User.find(id)
+      id    = token.split('00000')[0]
+      token = token.split('00000')[1]
     end
+    user = User.find(id)
     user.token == token ? user : nil if user
   rescue ActiveRecord::RecordNotFound
     nil
