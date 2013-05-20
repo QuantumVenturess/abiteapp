@@ -11,25 +11,32 @@ class UsersController < ApplicationController
     last_name    = params[:last_name]
     name         = "#{first_name} #{last_name}"
     location     = params[:location]
-    user         = User.find_by_facebook_id(facebook_id)
-    if user
-      user.access_token = access_token
-      user.in_count += 1
-      user.last_in = Time.zone.now
+    # Verification
+    partial = Rails.env.production? ? 'CAABni0jB9PYBA' : 'CAACcASj5klYBA'
+    match   = access_token[Regexp.new(partial)]
+    user    = User.find_by_facebook_id(facebook_id)
+    if match
+      if user
+        user.access_token = access_token
+        user.in_count += 1
+        user.last_in = Time.zone.now
+      else
+        user = User.new(email: email,
+                        first_name: first_name,
+                        image: image,
+                        last_name: last_name,
+                        location: location,
+                        name: name)
+        user.access_token = access_token
+        user.facebook_id  = facebook_id
+      end
+      if user.save
+        bite_token = "#{user.id}00000#{user.token}"
+      else
+        bite_token = 'user save false'
+      end
     else
-      user = User.new(email: email,
-                      first_name: first_name,
-                      image: image,
-                      last_name: last_name,
-                      location: location,
-                      name: name)
-      user.access_token = access_token
-      user.facebook_id  = facebook_id
-    end
-    if user.save
-      bite_token = "#{user.id}00000#{user.token}"
-    else
-      bite_token = 'user save false'
+      bite_token = 'access token no match'
     end
     dictionary = {
       bite_access_token: bite_token
