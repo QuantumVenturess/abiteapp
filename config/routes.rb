@@ -19,7 +19,11 @@ Abiteapp::Application.routes.draw do
       get :permalink
     end
   end
-  resources :users
+  resources :users do
+    member do
+      get :ios_new_user
+    end
+  end
 
   root to: 'seats#explore'
 

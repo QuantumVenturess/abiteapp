@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
                   :name
 
   validates :email, presence: true
+  validates :facebook_id, presence: true
   validates :name, presence: true
 
   has_many :completion_marks, dependent: :destroy

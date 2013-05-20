@@ -9,7 +9,36 @@ class UsersController < ApplicationController
       last_name = token.split(partial)[1]
       user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
     end
-    bite_token = user ? "#{user.id}00000#{user.token}" : ''
+    bite_token = user ? "#{user.id}00000#{user.token}" : 'ios new user'
+    dictionary = {
+      bite_access_token: bite_token
+    }
+    render json: dictionary
+  end
+
+  def ios_new_user
+    access_token = params[:access_token]
+    email        = params[:email]
+    facebook_id  = params[:facebook_id]
+    first_name   = params[:first_name]
+    image        = "http://graph.facebook.com/#{facebook_id}/picture?type=large"
+    last_name    = params[:last_name]
+    name         = params[:name]
+    location     = params[:location]
+    user         = User.find_by_facebook_id(facebook_id)
+    if user
+      user.access_token = access_token
+    else
+      user = User.new(email: email,
+                      first_name: first_name,
+                      image: image,
+                      last_name: last_name,
+                      location: location,
+                      name: name)
+      user.access_token = access_token
+      user.facebook_id  = facebook_id
+    end
+    bite_token = user.save ? "#{user.id}00000#{user.token}" : 'user save failed'
     dictionary = {
       bite_access_token: bite_token
     }
