@@ -34,9 +34,10 @@
     }
     img {
       @include browser(border-box, box-sizing);
-      @include calc(max-width, "100% - 20px");
       margin: 54px auto 20px auto;
+      max-width: 640px;
       padding: 0 10px;
+      @include calc(width, "100% - 20px");
     }
     .info {
       color: rgb(255, 255, 255);
