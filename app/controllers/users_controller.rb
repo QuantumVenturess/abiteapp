@@ -1,33 +1,21 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, except: :bite_access_token
+  before_filter :authenticate, except: [:authenticate_bite_app, 
+    :bite_access_token]
 
-  def bite_access_token
-    token = params[:token]
-    partial = Rails.env.production? ? 'CAABni0jB9PYBA' : 'CAACcASj5klYBA'
-    if token && token.split(partial).count == 2
-      facebook_id = token.split(partial)[0]
-      last_name = token.split(partial)[1]
-      user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
-    end
-    bite_token = user ? "#{user.id}00000#{user.token}" : 'ios new user'
-    dictionary = {
-      bite_access_token: bite_token
-    }
-    render json: dictionary
-  end
-
-  def ios_new_user
+  def authenticate_bite_app
     access_token = params[:access_token]
     email        = params[:email]
     facebook_id  = params[:facebook_id]
     first_name   = params[:first_name]
     image        = "http://graph.facebook.com/#{facebook_id}/picture?type=large"
     last_name    = params[:last_name]
-    name         = params[:name]
+    name         = "#{first_name} #{last_name}"
     location     = params[:location]
     user         = User.find_by_facebook_id(facebook_id)
     if user
       user.access_token = access_token
+      user.in_count += 1
+      user.last_in = Time.zone.now
     else
       user = User.new(email: email,
                       first_name: first_name,
@@ -38,7 +26,26 @@ class UsersController < ApplicationController
       user.access_token = access_token
       user.facebook_id  = facebook_id
     end
-    bite_token = user.save ? "#{user.id}00000#{user.token}" : 'user save failed'
+    if user.save
+      bite_token = "#{user.id}00000#{user.token}"
+    else
+      bite_token = 'user save false'
+    end
+    dictionary = {
+      bite_access_token: bite_token
+    }
+    render json: dictionary
+  end
+
+  def bite_access_token
+    token = params[:token]
+    partial = Rails.env.production? ? 'CAABni0jB9PYBA' : 'CAACcASj5klYBA'
+    if token && token.split(partial).count == 2
+      facebook_id = token.split(partial)[0]
+      last_name = token.split(partial)[1]
+      user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
+    end
+    bite_token = user ? "#{user.id}00000#{user.token}" : 'user nil'
     dictionary = {
       bite_access_token: bite_token
     }

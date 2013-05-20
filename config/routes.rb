@@ -19,11 +19,7 @@ Abiteapp::Application.routes.draw do
       get :permalink
     end
   end
-  resources :users do
-    member do
-      get :ios_new_user
-    end
-  end
+  resources :users
 
   root to: 'seats#explore'
 
@@ -49,6 +45,7 @@ Abiteapp::Application.routes.draw do
   match 'start', to: 'tables#start', as: 'start'
 
   # Users
+  match 'authenticate/bite-app', to: 'users#authenticate_bite_app'
   match 'authenticate/bite-access-token', to: 'users#bite_access_token'
   match 'read-tutorial', to: 'users#read_tutorial', as: 'read_tutorial'
   match 'update-location', to: 'users#update_location', as: 'update_location'
