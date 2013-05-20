@@ -1,6 +1,7 @@
 module TablesHelper
 
   include ApplicationHelper
+  include SeatsHelper
 
   def tables_to_json(tables)
     array = []
@@ -15,7 +16,7 @@ module TablesHelper
         place: table.place.attributes,
         place_id: table.place_id,
         ready: table.ready,
-        seats: table.seats,
+        seats: seats_to_json(table.seats),
         updated_at: nsdate_format(table.updated_at),
         user_id: table.user_id
       }
