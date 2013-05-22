@@ -59,7 +59,11 @@ class SeatsController < ApplicationController
       format.html
       format.js
       format.json {
-        render json: tables_to_json(@tables)
+        dictionary = {
+          pages: @tables.num_pages,
+          tables: tables_to_json(@tables)
+        }
+        render json: dictionary
       }
     end
   end
