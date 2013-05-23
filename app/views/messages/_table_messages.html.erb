@@ -1,0 +1,6 @@
+<% if current_user.sitting?(@table) %>
+  <h1>Messages</h1>
+  <div class="startMessages">
+    <%= render @messages %>
+  </div>
+<% end %>

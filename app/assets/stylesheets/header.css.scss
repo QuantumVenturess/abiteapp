@@ -46,5 +46,22 @@ header {
         margin: 0;
       }
     }
+    .rightBarButtonItem {
+      float: right;
+      height: 44px;
+      width: 44px;
+      &:hover {
+        cursor: pointer;
+      }
+      .compose {
+        height: 24px;
+        padding: 10px;
+        width: 24px;
+        img {
+          max-height: 24px;
+          max-width: 24px;
+        }
+      }
+    }
   }
 }

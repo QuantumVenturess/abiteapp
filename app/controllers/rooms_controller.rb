@@ -3,7 +3,9 @@ class RoomsController < ApplicationController
 
   def message
     room = Room.find(params[:id])
-    if current_user.sitting?(room.table)
+    if current_user.sitting?(room.table) && 
+      params[:content] && !params[:content].empty?
+      
       message = current_user.messages.new
       message.content = params[:content]
       message.room_id = room.id
@@ -22,12 +24,19 @@ class RoomsController < ApplicationController
         }
         format.js {
           @message = message
-          @room = room
+          @table   = room.table
         }
       end
     else
-      flash[:notice] = 'You must be seated to message'
-      redirect_to room.table
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'You must be seated to message'
+          redirect_to room.table
+        }
+        format.js {
+          render nothing: true
+        }
+      end
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to sitting_path

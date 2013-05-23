@@ -1,3 +1,8 @@
+<%= content_for :right_bar_button_item do %>
+  <div class="rightBarButtonItem">
+    <%= render 'messages/compose' %>
+  </div>
+<% end %>
 <div class="table_show">
   <div class="name">
     <%= @place.name %>
@@ -39,6 +44,9 @@
       <%= render partial: 'tables/join_table', object: @table, locals: { table: @table } %>
     </div>
   <% end %>
+  <div class="messages">
+    <%= render 'messages/table_messages' %>
+  </div>
   <div class="seats">
     <h1>
       People sitting
@@ -48,12 +56,12 @@
       <%= render partial: 'seats/user_seat', object: seat.user, as: :user %>
     <% end %>
   </div>
-  <div class="messageRoomButton">
-    <%= render 'tables/message_room' %>
-  </div>
   <% if !@table.complete && !current_user.already_marked_complete?(@table) %>
     <div class="leave_table">
       <%= render partial: 'tables/leave_table' %>
     </div>
   <% end %>
+</div>
+<div class="messageContainer">
+  <%= render 'messages/form' %>
 </div>

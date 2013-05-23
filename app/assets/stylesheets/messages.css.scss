@@ -1,46 +1,97 @@
-.messages {
-  padding: 10px 0;
-  .users {
-    margin: 0 0 10px 0;
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.table_show {
+  .messages {
     padding: 0 10px;
-    .seat {
-      float: left;
-      height: 40px;
-      overflow: hidden;
-      width: 60px;
-      img {
-        max-width: 60px;
-      }
-    }
-  }
-  .message {
-    font-size: 14px;
-    line-height: 21px;
-    margin: 0 0 5px 0;
-    padding: 0 10px;
-    &:last-child {
+    h1 {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 14px;
       margin: 0;
+      padding: 10px 0;
     }
-    .content {
-      a {
-        font-weight: 700;
-        text-decoration: none;
+    .message {
+      border-top: 1px solid rgb(160, 160, 160);
+      padding: 10px 0;
+      .userImage {
+        float: left;
+        height: 30px;
+        overflow: hidden;
+        text-align: center;
+        width: 30px;
+        img {
+          max-height: 30px;
+        }
       }
-    }
-    .timestamp {
-      color: rgb(160, 160, 160);
+      .body {
+        margin: 0 0 0 40px;
+        .userName {
+          a {
+            color: rgb(40, 40, 40);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 19px;
+            text-decoration: none;
+          }
+          .timestamp {
+            color: rgb(160, 160, 160);
+            font-size: 12px;
+            float: right;
+          }
+        }
+        .messageContent {
+          font-size: 13px;
+          line-height: 19px;
+        }
+      }
     }
   }
 }
 
-.messageForm {
-  background: rgb(240, 240, 240);
-  border-top: 1px solid rgb(120, 120, 120);
-  padding: 10px 10px 59px 10px;
-  textarea {
-    height: 76px;
+/* Message container overlay */
+.messageContainer {
+  background: rgba(0, 0, 0, 0.85);
+  @include browser(border-box, box-sizing);
+  display: none;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 54px 0 0 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+  form {
+    background: rgb(245, 245, 245);
+    padding: 20px 10px;
   }
   .action {
-    margin: 10px 0 0 0;
+    margin: 0 0 20px 0;
+    .cancelMessage {
+      border: 1px solid rgb(160, 160, 160);
+      background: rgb(200, 200, 200);
+      color: rgb(255, 255, 255);
+      float: left;
+      font-size: 14px;
+      padding: 10px 20px;
+      text-align: center;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    button {
+      float: right;
+      width: 50%;
+    }
+  }
+  .field {
+    textarea {
+      height: 90px;
+    }
   }
 }

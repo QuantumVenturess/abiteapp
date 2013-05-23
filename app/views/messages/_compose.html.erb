@@ -1,0 +1,5 @@
+<% if current_user.sitting?(@table) %>
+  <div class="compose">
+    <%= image_tag 'compose.png' %>
+  </div>
+<% end %>

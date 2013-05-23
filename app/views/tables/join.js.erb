@@ -1,8 +1,3 @@
-// Ready table
-<% if @table.ready? %>
-  window.location = "<%= room_path(@table.room) %>";
-<% end %>
-
 // Table Show
 // Remove join table form from table show
 $('.table_show .joinTable .join').remove();
@@ -12,9 +7,13 @@ $('.table_show .leave_table').html(
 // Insert user seat table show
 $('.table_show .seats').append('<%= j render partial: "seats/user_seat", 
   object: current_user, as: :user %>');
+// Insert messages
+$('.table_show .messages').html('<%= j render "messages/table_messages" %>');
+// Insert compose icon
+$('.rightBarButtonItem').html('<%= j render "messages/compose" %>');
 // Insert message room button
-$('.table_show .messageRoomButton').html(
-  '<%= j render "tables/message_room" %>');
+// $('.table_show .messageRoomButton').html(
+//   '<%= j render "tables/message_room" %>');
 
 // Explore
 // Remove join table form from explore
@@ -37,4 +36,16 @@ $('.link').click(function() {
   if ($(this).attr('href')) {
     window.location = $(this).attr('href');
   };
+});
+
+// Messages
+var container = $('.messageContainer');
+// Click compose shows message container and message form
+$('.compose').click(function() {
+  container.show();
+  $('.messageContainer textarea').focus();
+});
+// Cancel message hides message container
+$('.cancelMessage, .messageContainer button').click(function() {
+  container.hide();
 });

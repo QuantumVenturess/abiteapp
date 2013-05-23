@@ -1,8 +1,12 @@
-<%= form_tag message_room_path(@room), remote: true do %>
+<%= form_tag message_room_path(@table.room), remote: true do %>
+  <div class="action">
+    <div class="cancelMessage">
+      Cancel
+    </div>
+    <%= button_tag 'Submit' %>
+    <div class="clear"></div>
+  </div>
   <div class="field">
     <%= text_area_tag :content, '', placeholder: 'Message your plans here' %>
-  </div>
-  <div class="action">
-    <%= button_tag 'Submit' %>
   </div>
 <% end %>

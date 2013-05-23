@@ -1,9 +1,16 @@
 <div class="message">
-  <div class="content">
-    <%= link_to message.user.name, message.user %>
-    <%= message.content %>
+  <div class="userImage">
+    <%= image_tag 'lazy.jpg', 'data-original' => message.user.photo, class: 'lazyLoad' %>
   </div>
-  <div class="timestamp">
-    <%= time_ago_in_words(message.created_at) %> ago
+  <div class="body">
+    <div class="userName">
+      <%= link_to message.user.name, message.user %>
+      <div class="timestamp">
+        <%= time_ago_in_words(message.created_at) %> ago
+      </div>
+    </div>
+    <div class="messageContent">
+      <%= message.content %>
+    </div>
   </div>
 </div>

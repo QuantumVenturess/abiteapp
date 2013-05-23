@@ -10,7 +10,11 @@
   $('.leave_table form').remove();
   // Remove message room button
   $('.table_show .messageRoomButton a').remove();
+  // Remove compose icon
+  $('.rightBarButtonItem').html('');
   // Update People sitting count
   $('.seats h1 span').text(
     '<%= @table.seats.size %> out of <%= @table.max_seats %>');
+  // Remove messsages
+  $('.table_show .messages').html('');
 <% end %>
