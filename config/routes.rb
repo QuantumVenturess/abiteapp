@@ -14,6 +14,9 @@ Abiteapp::Application.routes.draw do
   resources :seats
   resources :tables do
     member do
+      get :change_date
+      get :date
+      post :date
       post :join
       get :mark_complete
       get :permalink

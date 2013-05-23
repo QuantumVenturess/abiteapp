@@ -3,6 +3,18 @@ module TablesHelper
   include ApplicationHelper
   include SeatsHelper
 
+  def random_start_date
+    r = Random.new
+    i = r.rand(0..3)
+    statements = [
+      'Time and date open for discussion',
+      'Let\'s go before the world ends',
+      'Let\'s get together before we grow old',
+      'Time and date to be announced'
+      ];
+    statements[i];
+  end
+
   def tables_to_json(tables)
     array = []
     tables.each do |table|

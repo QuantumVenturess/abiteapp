@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514061020) do
+ActiveRecord::Schema.define(:version => 20130523143119) do
 
   create_table "completion_marks", :force => true do |t|
     t.integer  "table_id"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20130514061020) do
     t.datetime "updated_at",                       :null => false
     t.boolean  "complete",      :default => false
     t.datetime "date_complete"
+    t.datetime "start_date"
   end
 
   add_index "tables", ["date_complete"], :name => "index_tables_on_date_complete"
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20130514061020) do
   add_index "tables", ["max_seats"], :name => "index_tables_on_max_seats"
   add_index "tables", ["place_id"], :name => "index_tables_on_place_id"
   add_index "tables", ["ready"], :name => "index_tables_on_ready"
+  add_index "tables", ["start_date"], :name => "index_tables_on_start_date"
   add_index "tables", ["user_id"], :name => "index_tables_on_user_id"
 
   create_table "users", :force => true do |t|

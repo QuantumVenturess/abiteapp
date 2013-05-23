@@ -53,8 +53,8 @@ class PlacesController < ApplicationController
       else
         max_seats = params[:max_seats_hidden]
       end
-    elsif params[:max_seats].to_i > 16
-      max_seats = 16
+    elsif params[:max_seats].to_i > 18
+      max_seats = 18
     elsif params[:max_seats].to_i < 2
       max_seats = 2
     else
@@ -79,8 +79,7 @@ class PlacesController < ApplicationController
     else
       place.save_image
     end
-    flash[:success] = 'Table started'
-    redirect_to table
+    redirect_to date_table_path(table)
   end
 
 end

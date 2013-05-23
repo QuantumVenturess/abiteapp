@@ -1,0 +1,21 @@
+<div class="tableStartDate">
+  <div class="startDateCalendar">
+    <%= render 'tables/calendar' %>
+  </div>
+  <%= form_tag date_table_path(@table), method: 'POST' do %>
+    <%= hidden_field_tag :day, @table.start_date ? @table.start_date.to_date : '', class: 'startDateDate' %>
+    <div class="time">
+      <div class="group">
+        <p>Hour</p>
+        <%= select_hour @table.start_date ? @table.start_date.hour : 17, ampm: true %>
+      </div>
+      <div class="group">
+        <p>Minute</p>
+        <%= select_minute @table.start_date ? @table.start_date.min : 0 %>
+      </div>
+    </div>
+    <div class="button">
+      <%= button_tag 'Begin' %>
+    </div>
+  <% end %>
+</div>

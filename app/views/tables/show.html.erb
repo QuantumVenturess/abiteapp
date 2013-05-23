@@ -1,27 +1,38 @@
 <div class="table_show">
+  <div class="name">
+    <%= @place.name %>
+  </div>
   <div class="image">
     <%= image_tag 'lazy.jpg', 'data-original' => @place.photo, class: 'lazyLoad' %>
   </div>
-  <div class="title">
-    <div class="name">
-      <%= @place.name %>
-    </div>
+  <div class="data">
     <div class="rating">
       <div class="yelpReviews <%= yelp_rating_to_class(@place.rating) %>"></div>
       <%= pluralize(@place.review_count, 'review') %>
     </div>
+    <div class="info">
+      <% if @place.address && !@place.address.empty? %>
+        <p><%=@place.address %></p>
+      <% end %>
+      <p>
+        <%= @place.city %>,
+        <%= @place.state_code %>
+        <%= @place.postal_code %>
+      </p>
+      <p><%= phone_number(@place.phone) %></p>
+    </div>
   </div>
   <div class="clear"></div>
-  <div class="info">
-    <% if @place.address && !@place.address.empty? %>
-      <p><%=@place.address %></p>
+<% if @table.user == current_user %>
+  <div class="startDate link" href="<%= date_table_path(@table) %>">
+<% else %>
+  <div class="startDate">
+<% end %>
+    <% if @table.start_date.nil? %>
+      <%= random_start_date %>
+    <% else %>
+      <%= @table.start_date.strftime('%A - %b %-d, %Y at %l:%M %P') %>
     <% end %>
-    <p>
-      <%= @place.city %>,
-      <%= @place.state_code %>
-      <%= @place.postal_code %>
-    </p>
-    <p><%= phone_number(@place.phone) %></p>
   </div>
   <% if !@table.complete %>
     <div class="joinTable">

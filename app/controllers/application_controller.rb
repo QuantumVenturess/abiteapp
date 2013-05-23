@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  include CalendarHelper
   include FacebookHelper
   include PlacesHelper
   include SessionsHelper

@@ -30,17 +30,17 @@ header {
       }
     }
     .menu {
-      float: right;
-      height: 24px;
-      margin: 10px;
-      width: 24px;
+      float: left;
+      height: 20px;
+      padding: 13px 10px 11px 10px;
+      width: 20px;
       &:hover {
         cursor: pointer;
       }
       .bar {
         background: rgb(255, 255, 255);
-        height: 4px;
-        margin: 0 0 6px 0;
+        height: 3px;
+        margin: 0 0 5px 0;
       }
       .bar:last-child {
         margin: 0;

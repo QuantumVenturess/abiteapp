@@ -1,6 +1,38 @@
 class TablesController < ApplicationController
   before_filter :authenticate, except: :permalink
 
+  def change_date
+    @table = Table.find(params[:id])
+    @date  = params[:date].to_date if params[:date]
+    respond_to do |format|
+      format.html {
+        redirect_to root_path
+      }
+      format.js {
+
+      }
+    end
+  end
+
+  def date
+    @title = @nav_title = 'Start Date'
+    @table = Table.find(params[:id])
+    @date  = Time.zone.now.to_date
+    if request.method == 'POST'
+      if params[:day] && params[:date]
+        day    = params[:day].to_date
+        hour   = params[:date][:hour].to_i
+        minute = params[:date][:minute].to_i
+        date   = DateTime.new(day.year, day.month, day.day, hour, minute)
+        @table.update_attribute(:start_date, date)
+        flash[:success] = 'Table started'
+        redirect_to @table
+      end
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
+  end
+
   def join
     table = Table.find(params[:id])
     seat = current_user.seats.new
@@ -115,6 +147,11 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     @place = @table.place
     @title = @place.name
+    # If table's creator is current user and table has no start date
+    if @table.user == current_user && @table.start_date.nil?
+      flash[:notice] = 'Please choose a start date for your table'
+      redirect_to date_table_path(@table)
+    end
   rescue ActiveRecord::RecordNotFound
     redirect_to explore_path
   end

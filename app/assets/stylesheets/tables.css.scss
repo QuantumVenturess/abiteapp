@@ -35,6 +35,18 @@
   }
 }
 
+.table {
+  .title {
+    .location {
+      color: rgb(160, 160, 160);
+    }
+    .startDate {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}
+
 /* Yelp ratings */
 .place_result, .table, .table_show {
   .rating {
@@ -96,16 +108,41 @@
     }
     .join {
       margin: 10px 0 0 0;
+      text-align: right;
+      button {
+        width: 50%;
+      }
+    }
+  }
+}
+
+/* Table join table button */
+.join {
+  form {
+    button {
+      background: rgb(207, 4, 4);
+      border: none;
+      color: rgb(255, 255, 255);
     }
   }
 }
 
 /* Tables detail */
 .table_show {
-  padding: 10px;
+  padding: 10px 0;
+  .name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+  }
   .image {
+    background: rgb(255, 255, 255);
     float: left;
     height: 100px;
+    margin: 0 1px 0 0;
+    padding: 10px;
     text-align: center;
     width: 100px;
     img {
@@ -113,26 +150,40 @@
       max-width: 100px;
     }
   }
-  .title {
-    height: 100px;
-    margin: 0 0 0 110px;
+  .data {
     overflow: hidden;
-    .name {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 25px;
+    .rating, .info {
+      background: rgb(255, 255, 255);
+    }
+    .rating {
+      padding: 5px 10px;
+    }
+    .info {
+      margin: 1px 0 0 0;
+      padding: 10px;
+      p {
+        font-size: 14px;
+        line-height: 23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
   }
-  .info {
-    margin: 10px 0 0 0;
-    p {
-      font-size: 14px;
-      line-height: 21px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+  .startDate {
+    background: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 21px;
+    margin: 1px 0 0 0;
+    padding: 5px 10px;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
     }
+  }
+  .joinTable, .messageRoomButton {
+    padding: 0 10px;
   }
   .messageRoom {
     background: rgb(235, 235, 235);

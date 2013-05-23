@@ -1,0 +1,80 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.tableStartDate {
+  .prev, .next {
+    background: rgb(60, 60, 60);
+    color: rgb(255, 255, 255);
+    display: block;
+    font-size: 20px;
+    height: 15px;
+    padding: 10px 14px;
+    text-decoration: none;
+    width: 7px;
+    div {
+      border-bottom: 7px solid transparent;
+      border-top: 7px solid transparent;
+      height: 0;
+      width: 0;
+    }
+  }
+  .prev {
+    float: left;
+    div {
+      border-right: 7px solid rgb(255, 255, 255);
+    }
+  }
+  .next {
+    float: right;
+    div {
+      border-left: 7px solid rgb(255, 255, 255);
+    }
+  }
+  .month {
+    font-size: 12px;
+    line-height: 15px;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .time {
+    @include browser(box-orient, horizontal);
+    display: -webkit-box;
+    display: moz-box;
+    display: ms-flexbox;
+    margin: 5px 0 0 0;
+    padding: 0 10px;
+    .group {
+      @include browser(box-flex, 1);
+      @include browser(box-sizing, border-box);
+      text-align: center;
+      width: 50%;
+      p {
+        font-size: 12px;
+        margin: 0 0 5px 0;
+      }
+      select {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        margin: 0;
+        padding: 10px;
+        text-align: -webkit-center;
+        text-align: -moz-center;
+        text-align: -ms-center;
+        width: 100%;
+      }
+    }
+  }
+  .button {
+    margin: 20px 0 0 0;
+    padding: 0 10px;
+    button {
+      background: rgb(207, 4, 4);
+      border: none;
+      color: rgb(255, 255, 255);
+    }
+  }
+}

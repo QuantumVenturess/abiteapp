@@ -1,0 +1,16 @@
+<%= link_to change_date_table_path(date: prev_month(@date)), class: 'prev', remote: true do %>
+  <div></div>
+<% end %>
+<%= link_to change_date_table_path(date: next_month(@date)), class: 'next', remote: true do %>
+  <div></div>
+<% end %>
+<div class="month">
+  <%= @date.strftime('%B, %Y') %>
+</div>
+<%= calendar @date do |date| %>
+  <% if date.month == @date.month %>
+    <div class="date <%= 'selected' if @table.start_date && @table.start_date.to_date == date %>" value="<%= date.strftime('%Y-%m-%d') %>">
+      <%= date.day %>
+    </div>
+  <% end %>
+<% end %>
