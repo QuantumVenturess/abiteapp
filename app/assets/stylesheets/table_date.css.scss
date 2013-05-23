@@ -52,12 +52,17 @@
       @include browser(box-sizing, border-box);
       text-align: center;
       width: 50%;
+      &:first-child {
+        margin: 0 1px 0 0;
+      }
       p {
         font-size: 12px;
         margin: 0 0 5px 0;
       }
       select {
         -webkit-appearance: none;
+        border: 1px solid rgb(160, 160, 160);
+        @include browser(border-radius, 0);
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 12px;
         margin: 0;

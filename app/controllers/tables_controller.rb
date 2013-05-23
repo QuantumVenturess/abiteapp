@@ -29,6 +29,7 @@ class TablesController < ApplicationController
         redirect_to @table
       end
     end
+    redirect_to @table if @table.user != current_user
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
