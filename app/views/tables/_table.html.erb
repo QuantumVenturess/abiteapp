@@ -35,10 +35,13 @@
     <% end %>
   </div>
   <div class="clear"></div>
-  <% if !current_user.sitting?(table) %>
-    <div class="startedBy">
-      <p><%= table.user.first_name %> started</p>
-    </div>
-  <% end %>
-  <%= render partial: 'tables/join_table', object: table, as: :table %>
+  <div>
+    <% if !current_user.sitting?(table) %>
+      <div class="startedBy">
+        <p><%= table.user.first_name %> started</p>
+      </div>
+    <% end %>
+    <%= render partial: 'tables/join_table', object: table, as: :table %>
+    <div class="clear"></div>
+  </div>
 </div>
