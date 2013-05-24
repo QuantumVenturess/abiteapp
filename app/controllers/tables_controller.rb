@@ -25,6 +25,10 @@ class TablesController < ApplicationController
         minute = params[:date][:minute].to_i
         date   = DateTime.new(day.year, day.month, day.day, hour, minute)
         @table.update_attribute(:start_date, date)
+        if Rails.env.production?
+          current_user.delay(queue: 'open_graph', 
+            priority: 10).open_graph('start', @table)
+        end
         flash[:success] = 'Table started'
         redirect_to @table
       end

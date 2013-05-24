@@ -74,10 +74,8 @@ class PlacesController < ApplicationController
     if Rails.env.production?
       place.delay(queue: 'save_image', 
         priority: 0).save_image
-      current_user.delay(queue: 'open_graph', 
-        priority: 10).open_graph('start', table)
     else
-      place.save_image
+      # place.save_image
     end
     redirect_to date_table_path(table)
   end
