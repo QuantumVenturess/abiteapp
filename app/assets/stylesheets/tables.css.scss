@@ -112,26 +112,25 @@
       padding: 20px 10px;
       text-decoration: none;
     }
-    .join {
+    .join, .startedBy {
       margin: 10px 0 0 0;
-      text-align: right;
-      .startedBy {
-        @include browser(box-sizing, border-box);
-        color: rgb(160, 160, 160);
-        float: left;
-        padding: 0 10px 0 0;
-        text-align: left;
-        width: 50%;
-        p {
-          font-size: 13px;
-          line-height: 36px;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-      }
-      button {
-        width: 50%;
+      width: 50%;
+    }
+    .join {
+      float: right;
+    }
+    .startedBy {
+      @include browser(box-sizing, border-box);
+      color: rgb(160, 160, 160);
+      float: left;
+      padding: 0 10px 0 0;
+      text-align: left;
+      p {
+        font-size: 13px;
+        line-height: 36px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
