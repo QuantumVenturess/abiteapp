@@ -11,7 +11,11 @@
     <% if @nav_title %>
       <p><%= @nav_title %></p>
     <% else %>
-      <%= image_tag 'logo.png' %>
+      <% if signed_in? %>
+        <%= image_tag 'logo.png' %>
+      <% else %>
+        <%= link_to image_tag('logo.png'), sign_in_path %>
+      <% end %>
     <% end %>
   </div>
 </div>

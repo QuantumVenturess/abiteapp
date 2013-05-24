@@ -1,7 +1,13 @@
-<%= content_for :right_bar_button_item do %>
-  <div class="rightBarButtonItem">
-    <%= render 'messages/compose' %>
-  </div>
+<% if signed_in? %>
+  <%= content_for :right_bar_button_item do %>
+    <div class="rightBarButtonItem">
+      <%= render 'messages/compose' %>
+    </div>
+  <% end %>
+<% else %>
+  <header>
+    <%= render 'layouts/header' %>
+  </header>
 <% end %>
 <div class="table_show">
   <div class="name">
@@ -39,13 +45,17 @@
       <%= @table.start_date.strftime('%A - %b %-d, %Y at %l:%M %P') %>
     <% end %>
   </div>
-  <% if !@table.complete %>
-    <div class="joinTable">
-      <%= render partial: 'tables/join_table', object: @table, locals: { table: @table } %>
-    </div>
+  <% if signed_in? %>
+    <% if !@table.complete %>
+      <div class="joinTable">
+        <%= render partial: 'tables/join_table', object: @table, locals: { table: @table } %>
+      </div>
+    <% end %>
   <% end %>
   <div class="messages">
-    <%= render 'messages/table_messages' %>
+    <% if signed_in? %>
+      <%= render 'messages/table_messages' %>
+    <% end %>
   </div>
   <div class="seats">
     <h1>
@@ -56,12 +66,16 @@
       <%= render partial: 'seats/user_seat', object: seat.user, as: :user %>
     <% end %>
   </div>
-  <% if !@table.complete && !current_user.already_marked_complete?(@table) %>
-    <div class="leave_table">
-      <%= render partial: 'tables/leave_table' %>
-    </div>
+  <% if signed_in? %>
+    <% if !@table.complete && !current_user.already_marked_complete?(@table) %>
+      <div class="leave_table">
+        <%= render partial: 'tables/leave_table' %>
+      </div>
+    <% end %>
   <% end %>
 </div>
-<div class="messageContainer">
-  <%= render 'messages/form' %>
-</div>
+<% if signed_in? %>
+  <div class="messageContainer">
+    <%= render 'messages/form' %>
+  </div>
+<% end %>

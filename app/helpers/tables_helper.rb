@@ -3,6 +3,13 @@ module TablesHelper
   include ApplicationHelper
   include SeatsHelper
 
+  def table_description(table)
+    ["Join #{table.user.first_name}", 
+      "and #{view_context.pluralize(table.max_seats - 1, 'other')}", 
+      "at #{table.place.name}",
+      "on #{table.start_date.strftime('%B %-d, %Y')}"].join(' ')
+  end
+
   def random_start_date
     r = Random.new
     i = r.rand(0..3)

@@ -1,5 +1,5 @@
 class TablesController < ApplicationController
-  before_filter :authenticate, except: :permalink
+  before_filter :authenticate, except: [:permalink, :show]
 
   def change_date
     @table = Table.find(params[:id])
@@ -133,9 +133,7 @@ class TablesController < ApplicationController
 
   def permalink
     @table = Table.find(params[:id])
-    @description = ["Join #{@table.user.first_name}", 
-      "and #{view_context.pluralize(@table.max_seats - 1, 'other')}", 
-      "at #{@table.place.name}"].join(' ')
+    @description = table_description(@table)
     @href = "http://abiteapp.com#{table_path(@table)}"
     @type = 'abiteapp:table'
     @url  = "#{@href}/permalink"
@@ -154,7 +152,7 @@ class TablesController < ApplicationController
       redirect_to date_table_path(@table)
     end
     # If user is sitting at table, show messages
-    if current_user.sitting?(@table)
+    if signed_in? && current_user.sitting?(@table)
       @messages = @table.room.messages.order('created_at DESC')
     end
   rescue ActiveRecord::RecordNotFound
