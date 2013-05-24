@@ -38,6 +38,7 @@ module TablesHelper
         seats: seats_to_json(table.seats),
         start_date: nsdate_format(table.start_date),
         updated_at: nsdate_format(table.updated_at),
+        user: table.user.attributes,
         user_id: table.user_id
       }
       array.append(hash)
