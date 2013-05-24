@@ -2,25 +2,10 @@
   active
 <% end %>
 <div class="sitting">
-  <div class="switch">
-    <div class="readySwitch <%= @ready_switch %>">
-      Tables ready to go
-    </div>
-    <div class="waitingSwitch <%= @waiting_switch %>">
-      Tables you joined
-    </div>
-  </div>
-  <div class="ready <%= @ready_switch %>">
-    <div class="tables">
-      <%= render partial: 'seats/sitting_table', object: @seats_ready, as: :seats %>
-    </div>
-  </div>
-  <div class="waiting <%= @waiting_switch %>">
-    <div class="tables">
-      <%= render partial: 'seats/sitting_table', object: @seats_waiting, as: :seats %>
-    </div>
+  <div class="tables">
+    <%= render partial: 'seats/sitting_table', object: @seats, as: :seats %>
   </div>
 </div>
 <div class="page">
-  <%= render partial: 'shared/pagination', object: @objects, as: :objects %>
+  <%= render partial: 'shared/pagination', object: @seats, as: :objects %>
 </div>

@@ -1,6 +1,9 @@
 <% if current_user && !current_user.sitting?(table) %>
   <div class="join">
     <%= form_tag join_table_path(table), remote: true do %>
+      <div class="startedBy">
+        <p><%= table.user.first_name %> started</p>
+      </div>
       <%= button_tag 'Join Table' %>
     <% end %>
   </div>

@@ -1,3 +1,10 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
 /* Place results and tables */
 .place_result, .table {
   border-top: 1px solid rgb(120, 120, 120);
@@ -22,7 +29,6 @@
       p {
         overflow: hidden;
         text-overflow: ellipsis;
-        overflow: hidden;
         white-space: nowrap;
       }
     }
@@ -109,6 +115,21 @@
     .join {
       margin: 10px 0 0 0;
       text-align: right;
+      .startedBy {
+        @include browser(box-sizing, border-box);
+        color: rgb(160, 160, 160);
+        float: left;
+        padding: 0 10px 0 0;
+        text-align: left;
+        width: 50%;
+        p {
+          font-size: 13px;
+          line-height: 36px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
       button {
         width: 50%;
       }

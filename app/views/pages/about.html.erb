@@ -1,9 +1,11 @@
-<%= content_for :head do %>
-  <style>
-    .wrapper {
-      padding: 0;
-    }
-  </style>
+<% if !signed_in? %>
+  <%= content_for :head do %>
+    <style>
+      .wrapper {
+        padding: 0;
+      }
+    </style>
+  <% end %>
 <% end %>
 <%= content_for :body_class do %>
   imageBackground

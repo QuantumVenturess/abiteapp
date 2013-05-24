@@ -70,23 +70,7 @@ class SeatsController < ApplicationController
 
   def sitting
     @title = @nav_title = 'Sitting'
-    @ready   = current_user.sitting_ready
-    @waiting = current_user.sitting_waiting
-    @seats_ready   = @ready.page(params[:p])
-    @seats_waiting = @waiting.page(params[:p])
-    if @ready.size > @waiting.size
-      @objects = @seats_ready
-    else
-      @objects = @seats_waiting
-    end
-    cookie = cookies[:sitting]
-    if !cookie || cookie == '' || cookie == 'ready'
-      @ready_switch   = 'active'
-      @waiting_switch = ''
-    else
-      @ready_switch   = ''
-      @waiting_switch = 'active'
-    end
+    @seats = current_user.sitting_waiting.page(params[:p])
     respond_to do |format|
       format.html
       format.js

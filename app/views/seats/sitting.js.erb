@@ -1,11 +1,10 @@
 // Insert data into page
-$('.ready .tables').append('<%= j render partial: "seats/sitting_table", 
-  object: @seats_ready, as: :seats %>');
-$('.waiting .tables').append('<%= j render partial: "seats/sitting_table", 
-  object: @seats_waiting, as: :seats %>');
+$('.sitting .tables').append('<%= j render partial: "seats/sitting_table", 
+  object: @seats, as: :seats %>');
 // Remove and add pagination
 $('.page').html('<%= j render partial: "shared/pagination", 
-  object: @objects, as: :objects %>');
+  object: @seats, as: :objects %>');
+
 // Lazy load
 $('.lazyLoad').each(function() {
   var original = $(this).attr('data-original');

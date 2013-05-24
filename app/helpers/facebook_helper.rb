@@ -53,6 +53,7 @@ module FacebookHelper
         'http://localhost:3000/auth'
       else
         'http://192.168.1.72:3000/auth'
+        'http://localhost:3000/auth'
       end
     end
   end
