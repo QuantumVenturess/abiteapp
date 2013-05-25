@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
 
   def sitting_waiting
     self.seats.joins(:table).order('start_date ASC').where(
-      'start_date >= ? AND complete = ?', Time.zone.now - (24 * 3600), false)
+      'start_date >= ? AND complete = ?', Time.zone.now - (12 * 3600), false)
   end
 
   def started_count
@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
       self.seats.select(
         :table_id).map { |seat| seat.table_id }.append(0).join(', ')
     Table.waiting.where("start_date >= ? AND id NOT IN (#{seat_ids})", 
-      Time.zone.now - (24 * 3600)).order('start_date ASC')
+      Time.zone.now - (12 * 3600)).order('start_date ASC')
   end
 
   def token
