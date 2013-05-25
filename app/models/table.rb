@@ -16,7 +16,7 @@ class Table < ActiveRecord::Base
   
   attr_accessible :max_seats, :ready, :start_date
 
-  validates :max_seats, inclusion: { in: 2..18 }
+  validates :max_seats, inclusion: { in: 2..20 }
   validates :place_id, presence: true
   validates :user_id, presence: true
 
