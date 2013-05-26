@@ -19,7 +19,9 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     @date  = Time.zone.now.to_date
     if request.method == 'POST'
-      if params[:day] && params[:date]
+      if params[:day] && params[:date] && 
+        !params[:day].empty? && !params[:date].empty?
+        
         day    = params[:day].to_date
         hour   = params[:date][:hour].to_i
         minute = params[:date][:minute].to_i
