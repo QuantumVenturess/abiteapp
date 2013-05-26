@@ -11,12 +11,8 @@
       </div>
       <div class="location">
         <p>
-          <% if table.place.address && !table.place.address.empty? %>
-            <%= table.place.address %>,
-          <% end %>
           <%= table.place.city %>, 
           <%= table.place.state_code %>
-          <%= table.place.postal_code %>
         </p>
       </div>
       <div class="startDate">
@@ -38,7 +34,11 @@
   <div>
     <% if !current_user.sitting?(table) %>
       <div class="startedBy">
-        <p><%= table.user.first_name %> started</p>
+        <p>
+          <%= table.user.first_name %> 
+          <%= table.user.last_name.split()[0] %>.
+          started
+        </p>
       </div>
     <% end %>
     <%= render partial: 'tables/join_table', object: table, as: :table %>

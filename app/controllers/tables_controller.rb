@@ -33,6 +33,9 @@ class TablesController < ApplicationController
         end
         flash[:success] = 'Table started'
         redirect_to @table
+      else
+        flash[:error] = 'Please choose your table\'s start date'
+        redirect_to date_table_path(@table)
       end
     end
     redirect_to @table if @table.user != current_user
