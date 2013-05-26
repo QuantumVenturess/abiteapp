@@ -123,7 +123,9 @@ class User < ActiveRecord::Base
 
   def sitting_waiting
     self.seats.joins(:table).order('start_date ASC').where(
-      'start_date >= ? AND complete = ?', Time.zone.now - (12 * 3600), false)
+      '(start_date >= ? AND complete = ?) OR 
+      (start_date IS NULL AND user_id = ?)', Time.zone.now - (12 * 3600), false,
+      self.id)
   end
 
   def started_count
