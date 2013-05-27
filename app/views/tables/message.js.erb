@@ -1,0 +1,31 @@
+// Prepend the message into the messages
+$('.startMessages').prepend('<%= j render partial: "messages/message", 
+  locals: { message: @message } %>');
+// Refresh the message form
+$('.messageContainer').html('<%= j render partial: "messages/form" %>');
+
+// Autoresize
+$('textarea').autoResize();
+// Lazy load
+$('.lazyLoad').each(function() {
+  var original = $(this).attr('data-original');
+  $(this).attr('src', original);
+});
+// Link
+$('.link').click(function() {
+  if ($(this).attr('href')) {
+    window.location = $(this).attr('href');
+  };
+});
+
+// Messages
+var container = $('.messageContainer');
+// Click compose shows message container and message form
+$('.compose').click(function() {
+  container.show();
+  $('.messageContainer textarea').focus();
+});
+// Cancel message hides message container
+$('.cancelMessage, .messageContainer button').click(function() {
+  container.hide();
+});

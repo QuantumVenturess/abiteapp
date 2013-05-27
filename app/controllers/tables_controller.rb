@@ -106,38 +106,60 @@ class TablesController < ApplicationController
     redirect_to explore_path
   end
 
-  def mark_complete_old
+  def message
     table = Table.find(params[:id])
-    lat = params[:lat]
-    lon = params[:lon]
-    if lat.nil? || lon.nil? || lat.empty? || lon.empty?
-      flash[:error] = 'You must enable GPS to mark complete'
-      redirect_to table.room
-    elsif current_user == table.user && 
-       current_user.sitting?(table) && 
-       !current_user.already_marked_complete?(table)
+    if current_user.sitting?(table) && 
+      params[:content] && !params[:content].empty?
 
-      # Create completion mark
-      # completion_mark = current_user.completion_marks.new
-      # completion_mark.table_id = table.id
-      # completion_mark.save
-      # table.calculate_completion
-      # table.calculate_completion_proximity(lat, lon)
-      if table.complete
-        flash[:success] = 'Table complete!'
+      message = current_user.messages.new
+      message.content  = params[:content]
+      message.table_id = table.id
+      message.save
+      # Create notifications
+      if Rails.env.production?
+        table.delay(queue: 'table_message_notifications',
+          priority: 10).create_message_notifications(message)
       else
-        flash[:success] = 'You must be near to mark complete'
+        table.create_message_notifications(message)
       end
-      redirect_to table
-    elsif table.complete
-      flash[:success] = 'This table already completed'
-      redirect_to table
+      respond_to do |format|
+        format.html {
+          flash[:success] = 'Message sent'
+          redirect_to table
+        }
+        format.js {
+          @message = message
+          @table   = table
+        }
+      end
     else
-      flash[:error] = 'Table was not marked complete'
-      redirect_to explore_path
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'You must be seated to message'
+          redirect_to table
+        }
+        format.js {
+          render nothing: true
+        }
+      end
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to explore_path
+    redirect_to root_path
+  end
+
+  def messages
+    table = Table.find(params[:id])
+    messages = table.messages.order('created_at DESC')
+    respond_to do |format|
+      format.html {
+        redirect_to root_path
+      }
+      format.json {
+        render json: messages
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   def permalink
@@ -162,7 +184,7 @@ class TablesController < ApplicationController
     end
     # If user is sitting at table, show messages
     if signed_in? && current_user.sitting?(@table)
-      @messages = @table.room.messages.order('created_at DESC')
+      @messages = @table.messages.order('created_at DESC')
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to explore_path

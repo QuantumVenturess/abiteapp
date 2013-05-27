@@ -24,6 +24,7 @@ class Table < ActiveRecord::Base
   belongs_to :user
 
   has_many :completion_marks, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :seats, dependent: :destroy
   has_one :room, dependent: :destroy
@@ -72,6 +73,16 @@ class Table < ActiveRecord::Base
             # UserMailer.table_ready(self, seat.user).deliver
           end
         end
+      end
+    end
+  end
+
+  def create_message_notifications(message)
+    self.seats.each do |seat|
+      if seat.user != message.user
+        notification = seat.user.notifications.new
+        notification.message_id = message.id
+        notification.save
       end
     end
   end

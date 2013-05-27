@@ -64,9 +64,6 @@ class PlacesController < ApplicationController
     table.max_seats = max_seats
     table.place_id  = place.id
     table.save
-    room            = Room.new
-    room.table_id   = table.id
-    room.save
     seat            = current_user.seats.new
     seat.table_id   = table.id
     seat.save

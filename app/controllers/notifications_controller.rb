@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
     notification.viewed = true
     notification.save
     if notification.message
-      redirect_to notification.message.room.table
+      redirect_to notification.message.table
     elsif notification.seat
       redirect_to notification.seat.table
     elsif notification.table

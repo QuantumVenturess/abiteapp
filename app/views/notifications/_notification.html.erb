@@ -3,7 +3,7 @@
     <% if notification.seat %>
       <%= image_tag 'lazy.jpg', 'data-original' => notification.seat.user.photo, class: 'lazyLoad' %>
     <% elsif notification.message %>
-      <%= image_tag 'lazy.jpg', 'data-original' => notification.message.room.table.place.photo, class: 'lazyLoad' %>
+      <%= image_tag 'lazy.jpg', 'data-original' => notification.message.table.place.photo, class: 'lazyLoad' %>
     <% elsif notification.table %>
       <% if notification.table.place.image_url %>
         <%= image_tag 'lazy.jpg', 'data-original' => notification.table.place.photo, class: 'lazyLoad' %>
@@ -20,7 +20,7 @@
           <%= notification.seat.table.place.name %>
         <% elsif notification.message %>
           New message for table at 
-          <%= notification.message.room.table.place.name %>
+          <%= notification.message.table.place.name %>
         <% elsif notification.table %>
           <%= notification.table.place.name %> table is ready
         <% end %>

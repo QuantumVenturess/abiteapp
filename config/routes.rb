@@ -14,12 +14,14 @@ Abiteapp::Application.routes.draw do
   resources :seats
   resources :tables do
     member do
-      get :change_date
-      get :date
+      get  :change_date
+      get  :date
       post :date
       post :join
-      get :mark_complete
-      get :permalink
+      get  :mark_complete
+      post :message
+      get  :messages
+      get  :permalink
     end
   end
   resources :users
