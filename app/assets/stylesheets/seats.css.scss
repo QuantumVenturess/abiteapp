@@ -22,11 +22,13 @@
 /* User seats */
 .table_show {
   .join {
-    margin: 10px 0 0 0;
+    margin: 10px 0;
   }
   .seats, .leave_table {
-    margin: 10px 0 0 0;
     padding: 0 10px;
+  }
+  .leave_table {
+    margin: 10px 0 0 0;
   }
   .seats {
     h1 {
