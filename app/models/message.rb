@@ -6,7 +6,6 @@ class Message < ActiveRecord::Base
   validates :table_id, presence: true
   validates :user_id, presence: true
 
-  belongs_to :room
   belongs_to :table
   belongs_to :user
 

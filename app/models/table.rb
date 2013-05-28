@@ -27,7 +27,6 @@ class Table < ActiveRecord::Base
   has_many :messages, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :seats, dependent: :destroy
-  has_one :room, dependent: :destroy
 
   scope :waiting, where(complete: false, ready: false)
 
