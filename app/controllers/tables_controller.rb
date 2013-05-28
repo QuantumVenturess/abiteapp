@@ -67,7 +67,7 @@ class TablesController < ApplicationController
         redirect_to table
       }
       format.js {
-        @messages = table.room.messages.order('created_at DESC')
+        @messages = table.messages.order('created_at DESC')
         @seat     = seat
         @table    = table
       }
