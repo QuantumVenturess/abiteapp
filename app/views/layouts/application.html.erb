@@ -39,6 +39,8 @@
     <header>
       <%= render 'layouts/header' %>
     </header>
+  <% else %>
+    <%= yield :header %>
   <% end %>
   <div class="wrapper">
     <div class="content">

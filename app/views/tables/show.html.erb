@@ -5,9 +5,11 @@
     </div>
   <% end %>
 <% else %>
-  <header>
-    <%= render 'layouts/header' %>
-  </header>
+  <%= content_for :header do %>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+  <% end %>
 <% end %>
 <div class="table_show">
   <div class="name">
