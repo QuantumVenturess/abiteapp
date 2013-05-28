@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   include CalendarHelper
   include FacebookHelper
+  include MessagesHelper
   include PlacesHelper
   include SessionsHelper
   include TablesHelper

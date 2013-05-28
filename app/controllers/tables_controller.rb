@@ -149,13 +149,12 @@ class TablesController < ApplicationController
 
   def messages
     table = Table.find(params[:id])
-    messages = table.messages.order('created_at DESC')
     respond_to do |format|
       format.html {
         redirect_to root_path
       }
       format.json {
-        render json: messages
+        render json: messages_to_json(table.messages.order('created_at DESC'))
       }
     end
   rescue ActiveRecord::RecordNotFound
