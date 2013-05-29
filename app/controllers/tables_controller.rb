@@ -45,37 +45,57 @@ class TablesController < ApplicationController
 
   def join
     table = Table.find(params[:id])
-    seat = current_user.seats.new
-    seat.table_id = table.id
-    seat.save
-    # If all seats filled, mark table as ready
-    table.check_ready
-    # Create notifications for all users who are sitting at table
-    if Rails.env.production?
-      table.delay(queue: 'table_join_notifications', 
-        priority: 10).create_notifications(current_user, seat)
+    if !current_user.sitting?(table)
+      seat = current_user.seats.new
+      seat.table_id = table.id
+      seat.save
+      # If all seats filled, mark table as ready
+      table.check_ready
+      # Create notifications for all users who are sitting at table
+      if Rails.env.production?
+        table.delay(queue: 'table_join_notifications', 
+          priority: 10).create_notifications(current_user, seat)
+      else
+        table.create_notifications(current_user, seat)
+      end
+      respond_to do |format|
+        format.html {
+          if table.ready
+            flash[:success] = 'This table is ready to go'
+          else
+            flash[:success] = 'You are now sitting at this table'
+          end
+          redirect_to table
+        }
+        format.js {
+          @messages = table.messages.order('created_at DESC')
+          @seat     = seat
+          @table    = table
+        }
+        format.json {
+          render json: seat_to_json(seat)
+        }
+      end
+      # FB open graph action
+      if Rails.env.production?
+        current_user.delay(queue: 'open_graph', 
+          priority: 10).open_graph('join', table)
+      end
     else
-      table.create_notifications(current_user, seat)
-    end
-    respond_to do |format|
-      format.html {
-        if table.ready
-          flash[:success] = 'This table is ready to go'
-        else
-          flash[:success] = 'You are now sitting at this table'
-        end
-        redirect_to table
-      }
-      format.js {
-        @messages = table.messages.order('created_at DESC')
-        @seat     = seat
-        @table    = table
-      }
-    end
-    # FB open graph action
-    if Rails.env.production?
-      current_user.delay(queue: 'open_graph', 
-        priority: 10).open_graph('join', table)
+      respond_to do |format|
+        format.html {
+          redirect_to table
+        }
+        format.js {
+          render nothing: true
+        }
+        format.json {
+          hash = {
+            error: 'Current user is already sitting at this table'
+          }
+          render json: hash
+        }
+      end
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
