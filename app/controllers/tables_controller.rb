@@ -276,6 +276,20 @@ class TablesController < ApplicationController
     redirect_to explore_path
   end
 
+  def seats
+    table = Table.find(params[:id])
+    respond_to do |format|
+      format.html {
+        redirect_to root_path
+      }
+      format.json {
+        render json: seats_to_json(table.seats)
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
+  end
+
   def show
     @table = Table.find(params[:id])
     @place = @table.place

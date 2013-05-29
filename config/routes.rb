@@ -23,6 +23,7 @@ Abiteapp::Application.routes.draw do
       post :message
       get  :messages
       get  :permalink
+      get  :seats
     end
   end
   resources :users
