@@ -226,6 +226,9 @@ class TablesController < ApplicationController
           @message = message
           @table   = table
         }
+        format.json {
+          render json: message_to_json(message)
+        }
       end
     else
       respond_to do |format|
@@ -235,6 +238,12 @@ class TablesController < ApplicationController
         }
         format.js {
           render nothing: true
+        }
+        format.json {
+          hash = {
+            error: 'Current user is not sitting at table or content is empty'
+          }
+          render json: hash
         }
       end
     end
