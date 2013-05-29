@@ -18,6 +18,7 @@ Abiteapp::Application.routes.draw do
       get  :date
       post :date
       post :join
+      post :leave
       get  :mark_complete
       post :message
       get  :messages

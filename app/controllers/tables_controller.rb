@@ -101,6 +101,81 @@ class TablesController < ApplicationController
     redirect_to root_path
   end
 
+  def leave
+    table = Table.find(params[:id])
+    seat  = Seat.find_by_table_id_and_user_id(table.id, current_user.id)
+    if seat.user == current_user
+      seat_user = seat.user
+      seat.destroy
+      # If there was more than 1 user at the table
+      if table.seats.size > 0
+        # If table was ready, delete the notifications about it being ready
+        if table.ready
+          table.notifications.each do |notification|
+            notification.destroy
+          end
+          # If only 1 person is left, make table not ready
+          if table.max_seats - table.seats.size == 1
+            table.ready = false
+            table.save
+          end
+        end
+        # If the table's creator leaves the table, give ownership to next user
+        if table.user == seat_user
+          next_seat = table.seats.order('created_at')[0]
+          table.user_id = next_seat.user.id
+          table.save
+        end
+      # If there are no more users at the table
+      else
+        table.destroy
+        flash[:notice] = 'You were the last to leave the table'
+      end
+      respond_to do |format|
+        format.html {
+          if table.seats.size == 0
+            redirect_to explore_path
+          else
+            flash[:notice] = 'You have left the table'
+            redirect_to table
+          end
+        }
+        format.js {
+          if table.seats.size == 0
+            @destroy = true
+          else
+            @destroy = false
+            @table   = table
+          end
+        }
+        format.json {
+          hash = {
+            success: 1
+          }
+          render json: hash
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to table
+        }
+        format.js {
+          render nothing: true
+        }
+        format.json {
+          hash = {
+            error: 'Seat does not belong to current user',
+            success: 0
+          }
+          render json: hash
+        }
+      end
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to explore_path
+  end
+
   def mark_complete
     table = Table.find(params[:id])
     lat = params[:lat]
