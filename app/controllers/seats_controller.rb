@@ -2,27 +2,34 @@ class SeatsController < ApplicationController
   before_filter :authenticate
 
   def explore
-    @title = @nav_title = 'Explore'
+    @title  = @nav_title = 'Explore'
     @tables = current_user.tables_not_sitting.page(params[:p])
     respond_to do |format|
       format.html
       format.js
       format.json {
-        dictionary = {
+        hash = {
           pages: @tables.num_pages,
           tables: tables_to_json(@tables)
         }
-        render json: dictionary
+        render json: hash
       }
     end
   end
 
   def sitting
-    @title = @nav_title = 'Sitting'
-    @seats = current_user.sitting_waiting.page(params[:p])
+    @title  = @nav_title = 'Sitting'
+    @tables = current_user.tables_sitting.page(params[:p])
     respond_to do |format|
       format.html
       format.js
+      format.json {
+        hash = {
+          pages: @tables.num_pages,
+          tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
     end
   end
 

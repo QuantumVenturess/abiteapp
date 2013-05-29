@@ -131,11 +131,19 @@ class User < ActiveRecord::Base
   end
 
   def tables_not_sitting
-    seat_ids = 
+    table_ids = 
       self.seats.select(
         :table_id).map { |seat| seat.table_id }.append(0).join(', ')
-    Table.waiting.where("start_date >= ? AND id NOT IN (#{seat_ids})", 
+    Table.waiting.where("start_date >= ? AND id NOT IN (#{table_ids})", 
       Time.zone.now - (12 * 3600)).order('start_date ASC')
+  end
+
+  def tables_sitting
+    table_ids = 
+      self.seats.select(
+        :table_id).map { |seat| seat.table_id }.append(0).join(', ')
+    Table.where("start_date >= ? AND complete = ? AND id IN (#{table_ids})",
+      Time.zone.now - (12 * 3600), false).order('start_date ASC')
   end
 
   def token

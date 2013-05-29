@@ -1,9 +1,8 @@
 // Insert data into page
-$('.sitting .tables').append('<%= j render partial: "seats/sitting_table", 
-  object: @seats, as: :seats %>');
+$('.sitting .tables').append('<%= j render @tables %>');
 // Remove and add pagination
 $('.page').html('<%= j render partial: "shared/pagination", 
-  object: @seats, as: :objects %>');
+  object: @tables, as: :objects %>');
 
 // Lazy load
 $('.lazyLoad').each(function() {

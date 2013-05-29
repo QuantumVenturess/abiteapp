@@ -3,9 +3,9 @@
 <% end %>
 <div class="sitting">
   <div class="tables">
-    <%= render partial: 'seats/sitting_table', object: @seats, as: :seats %>
+    <%= render @tables %>
   </div>
 </div>
 <div class="page">
-  <%= render partial: 'shared/pagination', object: @seats, as: :objects %>
+  <%= render partial: 'shared/pagination', object: @tables, as: :objects %>
 </div>
