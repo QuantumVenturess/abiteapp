@@ -19,7 +19,7 @@
         <% if table.start_date.nil? %>
           Time and date open for discussion
         <% else %>
-          <%= table.start_date.localtime.strftime('%a - %b %-d, %y at %l:%M %P') %>
+          <%= local_time(table.start_date).strftime('%a - %b %-d, %y at %l:%M %P') %>
         <% end %>
       </div>
     </div>

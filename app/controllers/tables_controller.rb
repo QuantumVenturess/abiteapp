@@ -18,9 +18,9 @@ class TablesController < ApplicationController
     @title = @nav_title = 'Start Date'
     @table = Table.find(params[:id])
     if @table.start_date
-      @date = @table.start_date.localtime.to_date
+      @date = local_time(@table.start_date).to_date
     else
-      @date = Time.zone.now.localtime.to_date
+      @date = local_time(Time.zone.now).to_date
     end
     if request.method == 'POST'
       if params[:day] && params[:date] && 
@@ -30,6 +30,7 @@ class TablesController < ApplicationController
         hour   = params[:date][:hour].to_i
         minute = params[:date][:minute].to_i
         date   = DateTime.new(day.year, day.month, day.day, hour, minute)
+        # Adjust time zone offset
         pdt    = ActiveSupport::TimeZone.new('Pacific Time (US & Canada)')
         date   = date - (pdt.now.formatted_offset.to_i).hour
         @table.update_attribute(:start_date, date)

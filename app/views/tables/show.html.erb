@@ -44,7 +44,7 @@
     <% if @table.start_date.nil? %>
       <%= random_start_date %>
     <% else %>
-      <%= @table.start_date.localtime.strftime('%A - %b %-d, %Y at %l:%M %P') %>
+      <%= local_time(@table.start_date).strftime('%A - %b %-d, %Y at %l:%M %P') %>
     <% end %>
   </div>
   <% if signed_in? %>
