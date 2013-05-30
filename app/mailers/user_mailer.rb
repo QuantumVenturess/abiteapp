@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
         @root_url = 'http://192.168.1.72:3000'
       end
     end
-    @table_url = "#{@root_url}#{url_for(@table)}"
+    @table_url = "#{@root_url}/tables/#{@table.id}"
     email_with_name = "#{user.name} <#{user.email}>"
     mail(to: email_with_name, 
          subject: "Your table at #{table.place.name} is ready", 

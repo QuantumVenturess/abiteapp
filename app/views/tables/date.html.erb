@@ -3,15 +3,15 @@
     <%= render 'tables/calendar' %>
   </div>
   <%= form_tag date_table_path(@table), method: 'POST' do %>
-    <%= hidden_field_tag :day, @table.start_date ? @table.start_date.to_date : @date, class: 'startDateDate' %>
+    <%= hidden_field_tag :day, @table.start_date ? @table.start_date.localtime.to_date : @date, class: 'startDateDate' %>
     <div class="time">
       <div class="group">
         <p>Hour</p>
-        <%= select_hour @table.start_date ? @table.start_date.hour : 17, ampm: true %>
+        <%= select_hour @table.start_date ? @table.start_date.localtime.hour : 17, ampm: true %>
       </div>
       <div class="group">
         <p>Minute</p>
-        <%= select_minute @table.start_date ? @table.start_date.min : 0 %>
+        <%= select_minute @table.start_date ? @table.start_date.localtime.min : 0 %>
       </div>
     </div>
     <div class="button">

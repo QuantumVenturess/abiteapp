@@ -69,7 +69,7 @@ class Table < ActiveRecord::Base
           if Rails.env.production?
             UserMailer.delay.table_ready(self, seat.user)
           else
-            # UserMailer.table_ready(self, seat.user).deliver
+            UserMailer.table_ready(self, seat.user).deliver
           end
         end
       end
