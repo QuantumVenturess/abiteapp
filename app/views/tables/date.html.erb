@@ -3,7 +3,7 @@
     <%= render 'tables/calendar' %>
   </div>
   <%= form_tag date_table_path(@table), method: 'POST' do %>
-    <%= hidden_field_tag :day, @table.start_date ? @table.start_date.to_date : '', class: 'startDateDate' %>
+    <%= hidden_field_tag :day, @table.start_date ? @table.start_date.to_date : @date, class: 'startDateDate' %>
     <div class="time">
       <div class="group">
         <p>Hour</p>

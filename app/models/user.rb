@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
       self.seats.select(
         :table_id).map { |seat| seat.table_id }.append(0).join(', ')
     Table.waiting.where("start_date >= ? AND id NOT IN (#{table_ids})", 
-      Time.zone.now - (12 * 3600)).order('start_date ASC')
+      Time.zone.now - (12 * 3600)).order('created_at DESC')
   end
 
   def tables_sitting

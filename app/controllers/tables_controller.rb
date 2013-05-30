@@ -17,7 +17,11 @@ class TablesController < ApplicationController
   def date
     @title = @nav_title = 'Start Date'
     @table = Table.find(params[:id])
-    @date  = Time.zone.now.to_date
+    if @table.start_date
+      @date = @table.start_date.to_date
+    else
+      @date = Time.zone.now.to_date
+    end
     if request.method == 'POST'
       if params[:day] && params[:date] && 
         !params[:day].empty? && !params[:date].empty?
@@ -45,7 +49,7 @@ class TablesController < ApplicationController
 
   def join
     table = Table.find(params[:id])
-    if !current_user.sitting?(table)
+    if !current_user.sitting?(table) && table.seats.size < table.max_seats
       seat = current_user.seats.new
       seat.table_id = table.id
       seat.save
@@ -90,8 +94,14 @@ class TablesController < ApplicationController
           render nothing: true
         }
         format.json {
+          if current_user.sitting?(table)
+            message = 'Current user is already sitting at this table'
+          else
+            message = "There are no more seats available 
+              (#{table.seats.size}/#{table.max_seats})"
+          end
           hash = {
-            error: 'Current user is already sitting at this table'
+            error: message
           }
           render json: hash
         }
