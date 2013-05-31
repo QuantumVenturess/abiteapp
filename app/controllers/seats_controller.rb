@@ -8,9 +8,16 @@ class SeatsController < ApplicationController
       format.html
       format.js
       format.json {
+        if params[:table_ids] && !params[:table_ids].empty?
+          table_ids = params[:table_ids].split(',').map { |id| id.to_i }
+          tables_to_remove = table_ids - @tables.map { |table| table.id }
+        else
+          tables_to_remove = []
+        end
         hash = {
           pages: @tables.num_pages,
-          tables: tables_to_json(@tables)
+          tables: tables_to_json(@tables),
+          tables_to_remove: tables_to_remove
         }
         render json: hash
       }
@@ -24,9 +31,16 @@ class SeatsController < ApplicationController
       format.html
       format.js
       format.json {
+        if params[:table_ids] && !params[:table_ids].empty?
+          table_ids = params[:table_ids].split(',').map { |id| id.to_i }
+          tables_to_remove = table_ids - @tables.map { |table| table.id }
+        else
+          tables_to_remove = []
+        end
         hash = {
           pages: @tables.num_pages,
-          tables: tables_to_json(@tables)
+          tables: tables_to_json(@tables),
+          tables_to_remove: tables_to_remove
         }
         render json: hash
       }
