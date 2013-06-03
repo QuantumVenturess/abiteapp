@@ -354,6 +354,9 @@ class TablesController < ApplicationController
       format.js {
         @results = results
       }
+      format.json {
+        render json: results
+      }
     end
   end
 

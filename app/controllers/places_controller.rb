@@ -60,9 +60,22 @@ class PlacesController < ApplicationController
     else
       max_seats = params[:max_seats]
     end
-    table           = current_user.tables.new
-    table.max_seats = max_seats
-    table.place_id  = place.id
+    table            = current_user.tables.new
+    table.max_seats  = max_seats
+    table.place_id   = place.id
+    if params[:start_day] && !params[:start_day].empty? &&
+      params[:start_hour] && !params[:start_hour].empty? &&
+      params[:start_minute] && !params[:start_minute].empty?
+
+      day    = params[:day].to_date
+      hour   = params[:date][:hour].to_i
+      minute = params[:date][:minute].to_i
+      date   = DateTime.new(day.year, day.month, day.day, hour, minute)
+      # Adjust time zone offset
+      pdt    = ActiveSupport::TimeZone.new('Pacific Time (US & Canada)')
+      date   = date - (pdt.now.formatted_offset.to_i).hour
+      table.start_date = date
+    end
     table.save
     seat            = current_user.seats.new
     seat.table_id   = table.id
@@ -74,7 +87,18 @@ class PlacesController < ApplicationController
     else
       # place.save_image
     end
-    redirect_to date_table_path(table)
+    respond_to do |format|
+      format.html {
+        if table.start_date
+          redirect_to table
+        else
+          redirect_to date_table_path(table)
+        end
+      }
+      format.json {
+        render json: table_to_json(table)
+      }
+    end
   end
 
 end
