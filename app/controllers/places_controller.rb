@@ -67,9 +67,9 @@ class PlacesController < ApplicationController
       params[:start_hour] && !params[:start_hour].empty? &&
       params[:start_minute] && !params[:start_minute].empty?
 
-      day    = params[:day].to_date
-      hour   = params[:date][:hour].to_i
-      minute = params[:date][:minute].to_i
+      day    = params[:start_day].to_date
+      hour   = params[:start_hour].to_i
+      minute = params[:start_minute].to_i
       date   = DateTime.new(day.year, day.month, day.day, hour, minute)
       # Adjust time zone offset
       pdt    = ActiveSupport::TimeZone.new('Pacific Time (US & Canada)')
