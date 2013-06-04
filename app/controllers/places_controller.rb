@@ -80,7 +80,7 @@ class PlacesController < ApplicationController
     seat            = current_user.seats.new
     seat.table_id   = table.id
     seat.save
-    # FB open graph action
+    # Download place image and upload to Amazon S3
     if Rails.env.production?
       place.delay(queue: 'save_image', 
         priority: 0).save_image
@@ -96,6 +96,12 @@ class PlacesController < ApplicationController
         end
       }
       format.json {
+        # Data sent from iOS app
+        # FB open graph action
+        if Rails.env.production?
+          current_user.delay(queue: 'open_graph', 
+            priority: 10).open_graph('start', table)
+        end
         render json: table_to_json(table)
       }
     end

@@ -39,10 +39,30 @@ class TablesController < ApplicationController
             priority: 10).open_graph('start', @table)
         end
         flash[:success] = 'Table started'
-        redirect_to @table
+        respond_to do |format|
+          format.html {
+            redirect_to @table
+          }
+          format.json {
+            hash = {
+              table: table_to_json(@table)
+            }
+            render json: hash
+          }
+        end
       else
-        flash[:error] = 'Please choose your table\'s start date'
-        redirect_to date_table_path(@table)
+        respond_to do |format|
+          format.html {
+            flash[:error] = 'Please choose your table\'s start date'
+            redirect_to date_table_path(@table)
+          }
+          format.json {
+            hash = {
+              error: 'Please choose your table\'s start date'
+            }
+            render json: hash
+          }
+        end
       end
     end
     redirect_to @table if @table.user != current_user
