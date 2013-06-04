@@ -8,6 +8,7 @@ class NotificationsController < ApplicationController
         redirect_to news_path
       }
       format.js
+      format.json
     end
   end
 
@@ -38,6 +39,20 @@ class NotificationsController < ApplicationController
         hash = {
           notifications: notifications_to_json(@notifications),
           pages: @notifications.num_pages
+        }
+        render json: hash
+      }
+    end
+  end
+
+  def news_unviewed
+    respond_to do |format|
+      format.html {
+        redirect_to news_path
+      }
+      format.json {
+        hash = {
+          notifications_unviewed: current_user.news.size
         }
         render json: hash
       }

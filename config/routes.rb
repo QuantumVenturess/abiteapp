@@ -32,6 +32,7 @@ Abiteapp::Application.routes.draw do
 
   # Notifications
   match '/news', to: 'notifications#news', as: 'news'
+  match '/news-unviewed', to: 'notifications#news_unviewed', as: 'news_unviewed'
   match '/clear-news', to: 'notifications#clear_news', as: 'clear_news'
 
   # Pages
