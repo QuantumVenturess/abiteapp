@@ -63,6 +63,7 @@ class PlacesController < ApplicationController
     table            = current_user.tables.new
     table.max_seats  = max_seats
     table.place_id   = place.id
+    data_sent_from_app = false
     if params[:start_day] && !params[:start_day].empty? &&
       params[:start_hour] && !params[:start_hour].empty? &&
       params[:start_minute] && !params[:start_minute].empty?
@@ -75,6 +76,7 @@ class PlacesController < ApplicationController
       pdt    = ActiveSupport::TimeZone.new('Pacific Time (US & Canada)')
       date   = date - (pdt.now.formatted_offset.to_i).hour
       table.start_date = date
+      data_sent_from_app = true
     end
     table.save
     seat            = current_user.seats.new
@@ -98,7 +100,7 @@ class PlacesController < ApplicationController
       format.json {
         # Data sent from iOS app
         # FB open graph action
-        if Rails.env.production?
+        if Rails.env.production? && data_sent_from_app
           current_user.delay(queue: 'open_graph', 
             priority: 10).open_graph('start', table)
         end

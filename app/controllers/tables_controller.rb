@@ -34,13 +34,14 @@ class TablesController < ApplicationController
         pdt    = ActiveSupport::TimeZone.new('Pacific Time (US & Canada)')
         date   = date - (pdt.now.formatted_offset.to_i).hour
         @table.update_attribute(:start_date, date)
-        if Rails.env.production?
-          current_user.delay(queue: 'open_graph', 
-            priority: 10).open_graph('start', @table)
-        end
-        flash[:success] = 'Table started'
         respond_to do |format|
           format.html {
+            # FB open graph action if done from mobile web app
+            if Rails.env.production?
+              current_user.delay(queue: 'open_graph', 
+                priority: 10).open_graph('start', @table)
+            end
+            flash[:success] = 'Table started'
             redirect_to @table
           }
           format.json {
@@ -52,13 +53,14 @@ class TablesController < ApplicationController
         end
       else
         respond_to do |format|
+          error = 'Please choose your table\'s start date'
           format.html {
-            flash[:error] = 'Please choose your table\'s start date'
+            flash[:error] = error
             redirect_to date_table_path(@table)
           }
           format.json {
             hash = {
-              error: 'Please choose your table\'s start date'
+              error: error
             }
             render json: hash
           }
@@ -85,6 +87,11 @@ class TablesController < ApplicationController
       else
         table.create_notifications(current_user, seat)
       end
+      # FB open graph action
+      if Rails.env.production?
+        current_user.delay(queue: 'open_graph', 
+          priority: 10).open_graph('join', table)
+      end
       respond_to do |format|
         format.html {
           if table.ready
@@ -102,11 +109,6 @@ class TablesController < ApplicationController
         format.json {
           render json: seat_to_json(seat)
         }
-      end
-      # FB open graph action
-      if Rails.env.production?
-        current_user.delay(queue: 'open_graph', 
-          priority: 10).open_graph('join', table)
       end
     else
       respond_to do |format|
