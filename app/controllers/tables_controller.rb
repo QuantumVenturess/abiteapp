@@ -19,8 +19,10 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     if @table.start_date
       @date = local_time(@table.start_date).to_date
+      new_table = false
     else
       @date = local_time(Time.zone.now).to_date
+      new_table = true
     end
     if request.method == 'POST'
       if params[:day] && params[:date] && 
@@ -36,8 +38,8 @@ class TablesController < ApplicationController
         @table.update_attribute(:start_date, date)
         respond_to do |format|
           format.html {
-            # FB open graph action if done from mobile web app
-            if Rails.env.production?
+            # FB open graph action if done from mobile web app and new table
+            if Rails.env.production? && new_table
               current_user.delay(queue: 'open_graph', 
                 priority: 10).open_graph('start', @table)
             end
