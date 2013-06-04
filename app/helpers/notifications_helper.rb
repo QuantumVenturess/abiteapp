@@ -3,7 +3,6 @@ module NotificationsHelper
   include ApplicationHelper
   include MessagesHelper
   include SeatsHelper
-  include TablesHelper
 
   def notifications_to_json(notifications)
     array = []

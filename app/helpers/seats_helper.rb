@@ -1,12 +1,13 @@
 module SeatsHelper
 
   include ApplicationHelper
+  include TablesHelper
 
   def seat_to_json(seat)
     hash = {
       created_at: nsdate_format(seat.created_at),
       id: seat.id,
-      table: seat.table.attributes,
+      table: table_to_json(seat.table),
       table_id: seat.table_id,
       updated_at: nsdate_format(seat.updated_at),
       user: seat.user.attributes,

@@ -31,7 +31,7 @@ class NotificationsController < ApplicationController
 
   def news
     @title = @nav_title = 'News'
-    @notifications = current_user.new_news.page(params[:p]).per(20)
+    @notifications = current_user.new_news.page(params[:p]).per(15)
     respond_to do |format|
       format.html
       format.js
