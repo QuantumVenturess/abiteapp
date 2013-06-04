@@ -35,7 +35,11 @@ class NotificationsController < ApplicationController
       format.html
       format.js
       format.json {
-        render json: notifications_to_json(@notifications)
+        hash = {
+          notifications: notifications_to_json(@notifications),
+          pages: @notifications.num_pages
+        }
+        render json: hash
       }
     end
   end
