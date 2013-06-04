@@ -163,7 +163,8 @@ class TablesController < ApplicationController
         }
         format.json {
           hash = {
-            success: 1
+            user: table.user.attributes,
+            user_id: table.user_id
           }
           render json: hash
         }
@@ -178,8 +179,7 @@ class TablesController < ApplicationController
         }
         format.json {
           hash = {
-            error: 'Seat does not belong to current user',
-            success: 0
+            error: 'Seat does not belong to current user'
           }
           render json: hash
         }
