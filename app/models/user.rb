@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def new_news
-    self.notifications.order('created_at DESC').limit(20)
+    self.notifications.order('created_at DESC')
   end
 
   def news
