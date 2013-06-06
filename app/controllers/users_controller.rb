@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     @user     = User.find(params[:id])
     @title    = @nav_title = @user.name
     tables    = @user.complete
-    @tables   = Kaminari.paginate_array(tables).page(params[:p]).per(5)
+    @tables   = Kaminari.paginate_array(tables).page(params[:p]).per(10)
     @started  = @user.started_count
     @sitting  = @user.sitting_count
     @complete = tables.size

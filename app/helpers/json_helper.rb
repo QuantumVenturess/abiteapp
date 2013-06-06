@@ -112,23 +112,7 @@ module JsonHelper
   def tables_to_json(tables)
     array = []
     tables.each do |table|
-      hash = {
-        complete: table.complete,
-        created_at: nsdate_format(table.created_at),
-        date_complete: nsdate_format(table.date_complete),
-        date_ready: nsdate_format(table.date_ready),
-        id: table.id,
-        max_seats: table.max_seats,
-        place: table.place.attributes,
-        place_id: table.place_id,
-        ready: table.ready,
-        seats: seats_to_json(table.seats.order('created_at ASC')),
-        start_date: nsdate_format(table.start_date),
-        updated_at: nsdate_format(table.updated_at),
-        user: table.user.attributes,
-        user_id: table.user_id
-      }
-      array.append(hash)
+      array.append(table_to_json(table))
     end
     array
   end
