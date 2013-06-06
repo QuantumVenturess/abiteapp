@@ -38,10 +38,19 @@ class UsersController < ApplicationController
     else
       bite_token = 'access token no match'
     end
-    dictionary = {
-      bite_access_token: bite_token
-    }
-    render json: dictionary
+    respond_to do |format|
+      format.html {
+        redirect_to root_path
+      }
+      format.json {
+        hash = {
+          bite_access_token: bite_token,
+          id: user.id,
+          read_tutorial: user.read_tutorial
+        }
+        render json: hash
+      }
+    end
   end
 
   def bite_access_token
