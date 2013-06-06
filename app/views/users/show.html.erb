@@ -38,9 +38,9 @@
     </div>
   </div>
   <div class="complete">
-    <%= render partial: 'users/complete_tables', object: @seats, as: :seats %>
+    <%= render partial: 'tables/complete', collection: @tables, as: :table %>
   </div>
 </div>
 <div class="page">
-  <%= render partial: 'shared/pagination', object: @seats, as: :objects %>
+  <%= render partial: 'shared/pagination', object: @tables, as: :objects %>
 </div>

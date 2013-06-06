@@ -1,12 +1,12 @@
 // Insert data into page
-$('.userShow .complete').append('<%= j render partial: "users/complete_tables", 
-  object: @seats, as: :seats %>');
+$('.userShow .complete').append('<%= j render partial: "tables/complete", 
+  collection: @tables, as: :table %>');
 // Remove and add pagination
-<% if @seats.num_pages == @seats.current_page %>
+<% if @tables.num_pages == @tables.current_page %>
   $('.page').remove();
 <% else %>
   $('.page').html('<%= j render partial: "shared/pagination", 
-    object: @seats, as: :objects %>');
+    object: @tables, as: :objects %>');
 <% end %>
 // Lazy load
 $('.lazyLoad').each(function() {

@@ -73,16 +73,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user  = User.find(params[:id])
-    seats  = @user.complete
-    @seats = seats.page(params[:p])
+    @user     = User.find(params[:id])
+    @title    = @nav_title = @user.name
+    tables    = @user.complete
+    @tables   = Kaminari.paginate_array(tables).page(params[:p]).per(5)
     @started  = @user.started_count
     @sitting  = @user.sitting_count
-    @complete = seats.size
-    @title = @nav_title = @user.name
+    @complete = tables.size
     respond_to do |format|
       format.html
       format.js
+      format.json {
+        hash = {
+          complete_count: @complete,
+          pages: @tables.num_pages,
+          sitting_count: @sitting,
+          started_count: @started,
+          tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to current_user

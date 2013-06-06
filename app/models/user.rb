@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
   def complete
     self.seats.joins(:table).order('date_complete DESC').where(tables: 
-      { complete: true })
+      { complete: true }).map { |seat| seat.table }
   end
 
   def new_news
