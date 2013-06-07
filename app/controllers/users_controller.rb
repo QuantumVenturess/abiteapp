@@ -78,6 +78,12 @@ class UsersController < ApplicationController
       format.js {
         render nothing: true
       }
+      format.json {
+        hash = {
+          read_tutorial: current_user.read_tutorial
+        }
+        render json: hash
+      }
     end
   end
 
