@@ -18,6 +18,7 @@ gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'oauth'
+# gem 'parse-ruby-client'
 gem 'pg'
 gem 'roadie'
 

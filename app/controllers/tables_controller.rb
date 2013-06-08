@@ -331,14 +331,21 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     @place = @table.place
     @title = @place.name
-    # If table's creator is current user and table has no start date
-    if @table.user == current_user && @table.start_date.nil?
-      flash[:notice] = 'Please choose a start date for your table'
-      redirect_to date_table_path(@table)
-    end
-    # If user is sitting at table, show messages
-    if signed_in? && current_user.sitting?(@table)
-      @messages = @table.messages.order('created_at DESC')
+    respond_to do |format|
+      format.html {
+        # If table's creator is current user and table has no start date
+        if @table.user == current_user && @table.start_date.nil?
+          flash[:notice] = 'Please choose a start date for your table'
+          redirect_to date_table_path(@table)
+        end
+        # If user is sitting at table, show messages
+        if signed_in? && current_user.sitting?(@table)
+          @messages = @table.messages.order('created_at DESC')
+        end
+      }
+      format.json {
+        render json: table_to_json(@table)
+      }
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to explore_path
