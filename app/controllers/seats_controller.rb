@@ -53,7 +53,10 @@ class SeatsController < ApplicationController
         redirect_to sitting_path
       }
       format.json {
-        render json: current_user.tables_sitting.map { |table| table.id }
+        hash = {
+          table_ids: current_user.tables_sitting.map { |table| table.id }
+        }
+        render json: hash
       }
     end
   end
