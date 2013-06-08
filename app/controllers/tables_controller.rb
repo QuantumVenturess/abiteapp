@@ -85,7 +85,7 @@ class TablesController < ApplicationController
       # Create notifications for all users who are sitting at table
       if Rails.env.production?
         table.delay(queue: 'table_join_notifications', 
-          priority: 10).create_notifications(current_user, seat)
+          priority: 9).create_notifications(current_user, seat)
       else
         table.create_notifications(current_user, seat)
       end
