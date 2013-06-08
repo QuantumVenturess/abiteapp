@@ -42,6 +42,7 @@ Abiteapp::Application.routes.draw do
   # Seats
   match 'explore', to: 'seats#explore', as: 'explore'
   match 'sitting', to: 'seats#sitting', as: 'sitting'
+  match 'sitting/all', to: 'seats#sitting_all', as: 'sitting_all'
   match 'sitting-switch', to: 'seats#sitting_switch', as: 'sitting_switch'
 
   # Sessions

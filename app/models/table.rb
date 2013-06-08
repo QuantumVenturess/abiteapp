@@ -119,4 +119,14 @@ class Table < ActiveRecord::Base
     room
   end
 
+  def send_join_push_notification(seat)
+    data = {
+      alert: "#{seat.user.first_name} sat down at #{self.place.name}",
+      badge: "Increment",
+      table_id: "#{self.id}"
+    }
+    push = Parse::Push.new(data, "table_#{self.id}")
+    push.save
+  end
+
 end

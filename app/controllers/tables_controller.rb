@@ -101,12 +101,22 @@ class TablesController < ApplicationController
           else
             flash[:success] = 'You are now sitting at this table'
           end
+          if Rails.env.production?
+            # Send push notification
+            table.delay(queue: 'join_push_notification',
+              priority: 10).send_join_push_notification(seat)
+          end
           redirect_to table
         }
         format.js {
           @messages = table.messages.order('created_at DESC')
           @seat     = seat
           @table    = table
+          if Rails.env.production?
+            # Send push notification
+            table.delay(queue: 'join_push_notification',
+              priority: 10).send_join_push_notification(seat)
+          end
         }
         format.json {
           render json: seat_to_json(seat)

@@ -47,6 +47,17 @@ class SeatsController < ApplicationController
     end
   end
 
+  def sitting_all
+    respond_to do |format|
+      format.html {
+        redirect_to sitting_path
+      }
+      format.json {
+        render json: current_user.tables_sitting.map { |table| table.id }
+      }
+    end
+  end
+
   def sitting_switch
     cookie = cookies[:sitting]
     if !cookie || cookie == '' || cookie == 'ready'
