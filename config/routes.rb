@@ -26,7 +26,14 @@ Abiteapp::Application.routes.draw do
       get  :seats
     end
   end
-  resources :users
+  resources :users do
+    member do
+      get :complete
+      get :sitting
+      get :started
+      get :stats
+    end
+  end
 
   root to: 'seats#explore'
 

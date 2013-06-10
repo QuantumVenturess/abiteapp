@@ -68,6 +68,23 @@ class UsersController < ApplicationController
     render json: dictionary
   end
 
+  def complete
+    @user   = User.find(params[:id])
+    @title  = @nav_title = @user.name
+    @tables = Kaminari.paginate_array(@user.complete).page(params[:p]).per(10)
+    respond_to do |format|
+      format.json {
+        hash = {
+          pages: @tables.num_pages,
+          tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to current_user
+  end
+
   def read_tutorial
     current_user.read_tutorial = true
     current_user.save
@@ -105,6 +122,57 @@ class UsersController < ApplicationController
           sitting_count: @sitting,
           started_count: @started,
           tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to current_user
+  end
+
+  def sitting
+    @user   = User.find(params[:id])
+    @title  = @nav_title = @user.name
+    @tables = @user.tables_sitting.page(params[:p])
+    respond_to do |format|
+      format.json {
+        hash = {
+          pages: @tables.num_pages,
+          tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to current_user
+  end
+
+  def started
+    @user   = User.find(params[:id])
+    @title  = @nav_title = @user.name
+    @tables = @user.tables.order('created_at DESC').page(params[:p])
+    respond_to do |format|
+      format.json {
+        hash = {
+          pages: @tables.num_pages,
+          tables: tables_to_json(@tables)
+        }
+        render json: hash
+      }
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to current_user
+  end
+
+  def stats
+    @user   = User.find(params[:id])
+    @title  = @nav_title = @user.name
+    respond_to do |format|
+      format.json {
+        hash = {
+          complete_count: @user.complete.size,
+          sitting_count: @user.sitting_count,
+          started_count: @user.started_count
         }
         render json: hash
       }

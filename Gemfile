@@ -14,14 +14,15 @@ gem 'httparty'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari'
-gem 'mini_magick'
+gem 'mini_magick', '~> 3.5.0'
 gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'oauth'
+
 gem 'parse-ruby-client'
+
 gem 'pg'
 gem 'roadie'
-
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
