@@ -1,19 +1,32 @@
-.menu_panel {
-  background: rgb(80, 80, 80);
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.menuView {
+  background: rgba(0, 0, 0, 0.5);
   display: none;
   height: 100%;
+  margin: 0 auto;
+  max-width: 640px;
   position: fixed;
-  right: 0;
   top: 0;
   width: 100%;
   z-index: 200;
+}
+
+.menu_panel {
+  background: rgb(245, 245, 245);
+  @include browser(box-sizing, border-box);
+  height: 100%;
+  max-width: 426px;
+  width: 67%;
   .title {
-    color: rgb(255, 255, 255);
-    font-size: 24px;
+    color: rgb(40, 40, 40);
+    font-size: 18px;
+    font-weight: 700;
     height: 44px;
     line-height: 44px;
     text-align: center;
@@ -33,10 +46,10 @@
     margin: 0;
     padding: 0;
     li {
-      color: rgb(255, 255, 255);
+      color: rgb(40, 40, 40);
       padding: 0 10px;
       .holder {
-        border-top: 1px solid rgb(255, 255, 255);
+        border-top: 1px solid rgb(160, 160, 160);
         height: 30px;
         padding: 10px 0;
       }
@@ -52,7 +65,7 @@
       }
       .label {
         float: left;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 30px;
         margin: 0 0 0 10px;
       }

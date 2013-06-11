@@ -1,7 +1,7 @@
-<%= link_to change_date_table_path(date: prev_month(@date)), class: 'prev', remote: true do %>
+<%= link_to change_date_table_path(@table, date: prev_month(@date)), class: 'prev', remote: true do %>
   <div></div>
 <% end %>
-<%= link_to change_date_table_path(date: next_month(@date)), class: 'next', remote: true do %>
+<%= link_to change_date_table_path(@table, date: next_month(@date)), class: 'next', remote: true do %>
   <div></div>
 <% end %>
 <div class="month">

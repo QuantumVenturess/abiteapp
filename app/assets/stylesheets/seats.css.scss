@@ -1,8 +1,14 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
 /* Table seats */
 .tables {
   .table {
     .seats {
-      margin: 10px 0 0 0;
       .seat {
         float: left;
         height: 40px;
@@ -29,6 +35,10 @@
   }
   .leave_table {
     margin: 10px 0 0 0;
+    button {
+      border: none;
+      @include browser(border-radius, 2px);
+    }
   }
   .seats {
     h1 {

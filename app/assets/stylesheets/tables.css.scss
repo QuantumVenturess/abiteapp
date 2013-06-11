@@ -7,10 +7,8 @@
 
 /* Place results and tables */
 .place_result, .table {
-  border-top: 1px solid rgb(120, 120, 120);
   font-size: 14px;
   line-height: 17px;
-  padding: 20px 10px;
   .image {
     float: left;
     height: 60px;
@@ -41,16 +39,9 @@
   }
 }
 
-.table {
-  .title {
-    .location {
-      color: rgb(160, 160, 160);
-    }
-    .startDate {
-      font-size: 14px;
-      line-height: 20px;
-    }
-  }
+.place_result {
+  border-top: 1px solid rgb(120, 120, 120);
+  padding: 20px 10px;
 }
 
 /* Yelp ratings */
@@ -103,36 +94,51 @@
 
 /* Tables */
 .tables {
+  background: rgb(235, 235, 235);
+  padding: 10px 0 0 0;
   .table {
-    &:first-child {
-      border: none;
-    }
-    a {
-      display: block;
-      padding: 20px 10px;
-      text-decoration: none;
-    }
-    .join, .startedBy {
-      margin: 10px 0 0 0;
-      width: 50%;
-    }
-    .join {
-      float: right;
-    }
-    .startedBy {
-      @include browser(box-sizing, border-box);
-      color: rgb(160, 160, 160);
-      float: left;
-      padding: 0 10px 0 0;
-      text-align: left;
-      p {
-        font-size: 13px;
-        line-height: 36px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
+    padding: 0 10px 10px 10px;
+    .tableContainer {
+      background: rgb(255, 255, 255);
+      .tableInfo {
+        padding: 10px;
+        .title {
+          .location {
+            color: rgb(160, 160, 160);
+          }
+          .startDate {
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
       }
-    }
+      a {
+        display: block;
+        padding: 20px 10px;
+        text-decoration: none;
+      }
+      .join, .startedBy {
+        @include browser(box-sizing, border-box);
+        width: 50%;
+      }
+      .join {
+        float: right;
+        padding: 10px 10px 10px 0;
+      }
+      .startedBy {
+        color: rgb(160, 160, 160);
+        float: left;
+        padding: 10px;
+        text-align: left;
+        p {
+          font-size: 13px;
+          line-height: 36px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    } 
   }
 }
 
@@ -142,6 +148,7 @@
     button {
       background: rgb(207, 4, 4);
       border: none;
+      @include browser(border-radius, 2px);
       color: rgb(255, 255, 255);
     }
   }

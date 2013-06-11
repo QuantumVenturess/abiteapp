@@ -53,6 +53,7 @@
         <% end %>
       </div>
       <%= yield %>
+      <%= render 'shared/menu' %>
     </div>
   </div>
   <% if signed_in? %>
@@ -60,7 +61,6 @@
       <%= render 'layouts/footer' %>
     </footer>
   <% end %>
-  <%= render 'shared/menu' %>
   <div class="spinner"></div>
 </body>
 </html>

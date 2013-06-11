@@ -1,4 +1,17 @@
 $(document).ready(function() {
+
+  // Clicking the place result
+  $('.place_result').click(function() {
+    var id = $(this).attr('id');
+    var form = $('#' + id + ' form');
+    $.ajax({
+      data: form.serialize(),
+      dataType: 'script',
+      type: form.attr('method'),
+      url: form.attr('action')
+    });
+  });
+  
   // Clicking the start button
   $('.table_form .seatButton').click(function() {
     var value = $(this).attr('data-value');

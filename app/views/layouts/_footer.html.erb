@@ -1,30 +1,22 @@
 <div class="footer">
   <div class="tabbar">
-    <div class="tabitem link <%= yield :explore_class %>" href="<%= url_for explore_path %>">
-      <div class="image">
-        <%= image_tag 'explore.png' %>
-      </div>
+    <div class="tabitem link explore<%= yield :explore_class %>" href="<%= url_for explore_path %>">
+      <div class="image"></div>
       <p>Explore</p>
     </div>
-    <div class="tabitem link <%= yield :sitting_class %>" href="<%= url_for sitting_path %>">
-      <div class="image">
-        <%= image_tag 'sitting.png' %>
-      </div>
+    <div class="tabitem link sitting<%= yield :sitting_class %>" href="<%= url_for sitting_path %>">
+      <div class="image"></div>
       <p>Sitting</p>
     </div>
-    <div class="tabitem link <%= yield :start_class %>" href="<%= url_for start_path %>">
-      <div class="image">
-        <%= image_tag 'start.png' %>
-      </div>
+    <div class="tabitem link start<%= yield :start_class %>" href="<%= url_for start_path %>">
+      <div class="image"> </div>
       <p>Start</p>
     </div>
-    <div class="tabitem link <%= yield :news_class %>" href="<%= url_for news_path %>">
+    <div class="tabitem link news<%= yield :news_class %>" href="<%= url_for news_path %>">
       <div class="news_alert">
         <%= render 'notifications/news_alert' %>
       </div>
-      <div class="image">
-        <%= image_tag 'news.png' %>
-      </div>
+      <div class="image"></div>
       <p>News</p>
     </div>
   </ul>

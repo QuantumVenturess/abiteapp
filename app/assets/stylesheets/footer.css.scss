@@ -38,6 +38,9 @@ footer {
         -ms-box-sizing: border-box;
         box-sizing: border-box;
         .image {
+          background-position: 0 3px;
+          background-repeat: no-repeat;
+          background-size: 28px 28px;
           height: 28px;
           margin: 0 auto;
           padding: 3px 0;
@@ -48,10 +51,55 @@ footer {
           }
         }
         p {
-          color: rgb(255, 255, 255);
+          color: rgb(160, 160, 160);
           font-weight: 700;
           font-size: 12px;
           line-height: 13px;
+        }
+        &.active {
+          p {
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+      .explore {
+        .image {
+          background-image: url('explore.png');
+        }
+        &.active {
+          .image {
+            background-image: url('explore_selected.png');
+          }
+        }
+      }
+      .sitting {
+        .image {
+          background-image: url('sitting.png');
+        }
+        &.active {
+          .image {
+            background-image: url('sitting_selected.png');
+          }
+        }
+      }
+      .start {
+        .image {
+          background-image: url('start.png');
+        }
+        &.active {
+          .image {
+            background-image: url('start_selected.png');
+          }
+        }
+      }
+      .news {
+        .image {
+          background-image: url('news.png');
+        }
+        &.active {
+          .image {
+            background-image: url('news_selected.png');
+          }
         }
       }
     }

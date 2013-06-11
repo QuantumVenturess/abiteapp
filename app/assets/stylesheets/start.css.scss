@@ -36,7 +36,6 @@
 }
 
 .table_form {
-  margin: 10px 0 0 0;
   .buttons {
     @include browser(box-orient, horizontal);
     display: -webkit-box;

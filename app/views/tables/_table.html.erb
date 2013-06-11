@@ -1,38 +1,38 @@
 <div class="table link" id="table_<%= table.id %>" href="<%= url_for(table) %>">
-  <div>
-    <div class="image">
-      <%= image_tag 'lazy.jpg', 'data-original' => table.place.photo, class: 'lazyLoad' %>
+  <div class="tableContainer">
+    <div class="tableInfo">
+      <div class="image">
+        <%= image_tag 'lazy.jpg', 'data-original' => table.place.photo, class: 'lazyLoad' %>
+      </div>
+      <div class="title">
+        <div class="name">
+          <p>
+            <%= table.place.name %>
+          </p>
+        </div>
+        <div class="location">
+          <p>
+            <%= table.place.city %>, 
+            <%= table.place.state_code %>
+          </p>
+        </div>
+        <div class="startDate">
+          <% if table.start_date.nil? %>
+            Time and date open for discussion
+          <% else %>
+            <%= local_time(table.start_date).strftime('%a - %b %-d, %y at %l:%M %P') %>
+          <% end %>
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="title">
-      <div class="name">
-        <p>
-          <%= table.place.name %>
-        </p>
-      </div>
-      <div class="location">
-        <p>
-          <%= table.place.city %>, 
-          <%= table.place.state_code %>
-        </p>
-      </div>
-      <div class="startDate">
-        <% if table.start_date.nil? %>
-          Time and date open for discussion
-        <% else %>
-          <%= local_time(table.start_date).strftime('%a - %b %-d, %y at %l:%M %P') %>
-        <% end %>
-      </div>
+    <div class="seats">
+      <% table.seats.order('created_at ASC').each do |seat| %>
+        <%= render partial: 'seats/seat', object: seat %>
+      <% end %>
     </div>
     <div class="clear"></div>
-  </div>
-  <div class="seats">
-    <% table.seats.order('created_at ASC').each do |seat| %>
-      <%= render partial: 'seats/seat', object: seat %>
-    <% end %>
-  </div>
-  <div class="clear"></div>
-  <div>
-    <% if !current_user.sitting?(table) %>
+    <div>
       <div class="startedBy">
         <p>
           <%= table.user.first_name %> 
@@ -40,8 +40,8 @@
           started
         </p>
       </div>
-    <% end %>
-    <%= render partial: 'tables/join_table', object: table, as: :table %>
-    <div class="clear"></div>
+      <%= render partial: 'tables/join_table', object: table, as: :table %>
+      <div class="clear"></div>
+    </div>
   </div>
 </div>

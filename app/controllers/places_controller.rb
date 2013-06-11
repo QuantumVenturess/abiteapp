@@ -97,6 +97,14 @@ class PlacesController < ApplicationController
           redirect_to date_table_path(table)
         end
       }
+      format.js {
+        @table = table
+        if @table.start_date
+          @date = local_time(@table.start_date).to_date
+        else
+          @date = local_time(Time.zone.now).to_date
+        end
+      }
       format.json {
         # Data sent from iOS app
         # FB open graph action

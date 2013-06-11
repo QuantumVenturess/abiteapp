@@ -1,0 +1,8 @@
+// Insert calendar into view
+$('.content').html('<%= j render partial: "tables/date" %>');
+// When clicking a date, update calendar
+$('.tableStartDate .calendar .date').click(function() {
+  $('.tableStartDate .calendar .date').removeClass('selected');
+  $(this).addClass('selected');
+  $('.tableStartDate .startDateDate').val($(this).attr('value'));
+});
