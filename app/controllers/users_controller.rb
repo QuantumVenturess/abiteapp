@@ -171,8 +171,8 @@ class UsersController < ApplicationController
       format.json {
         hash = {
           complete_count: @user.complete.size,
-          sitting_count: @user.sitting_count,
-          started_count: @user.started_count
+          sitting_count: @user.tables_sitting.size,
+          started_count: @user.tables.size
         }
         render json: hash
       }
