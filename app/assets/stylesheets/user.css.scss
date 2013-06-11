@@ -6,70 +6,74 @@
 }
 
 $borderGray: rgb(200, 200, 200);
+$gray160: rgb(160, 160, 160);
+$gray245: rgb(245, 245, 245);
 $imageSize: 60px;
 $imageSizeSmall: 38px;
 
 .userShow {
-  padding: 10px;
-  .top {
-    .image {
-      float: left;
-      height: $imageSize;
-      text-align: center;
-      overflow: hidden;
-      width: $imageSize;
-      img {
-        max-height: $imageSize;
+  .userView {
+    background: rgb(235, 235, 235);
+    padding: 20px 0;
+    .top {
+      padding: 0 10px;
+      .image {
+        float: left;
+        height: $imageSize;
+        text-align: center;
+        overflow: hidden;
+        width: $imageSize;
+        img {
+          max-height: $imageSize;
+        }
       }
-    }
-    .info {
-      float: left;
-      margin: 0 0 0 10px;
-      .name {
-        p {
-          font-size: 18px;
-          line-height: 30px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
+      .info {
+        float: left;
+        margin: 0 0 0 20px;
+        .name {
+          p {
+            font-size: 18px;
+            line-height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
         }
       }
     }
   }
   .stats {
-    border-bottom: 1px solid $borderGray;
-    border-top: 1px solid $borderGray;
+    border-top: 1px solid $gray245;
     @include browser(box-orient, horizontal);
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
     .group {
+      border-bottom: 1px solid $gray245;
       @include browser(box-flex, 1);
       @include browser(box-sizing, border-box);
+      color: $gray160;
       font-size: 14px;
-      line-height: 16px;
+      line-height: 19px;
       padding: 5px 0;
       text-align: center;
       width: 33%;
       &.middle {
-        border-left: 1px solid $borderGray;
-        border-right: 1px solid $borderGray;
+        border-left: 1px solid $gray245;
+        border-right: 1px solid $gray245;
       }
-      .data {
-        margin: 0 0 3px 0;
-      }
-      .label {
-        color: rgb(120, 120, 120);
+      &.active {
+        border-bottom: 1px solid rgb(207, 4, 4);
+        color: rgb(40, 40, 40);
       }
     }
   }
-  .complete {
-    margin: 5px 0 0 0;
+  .userShowTables {
     .completeTable {
       border-top: 1px solid rgb(120, 120, 120);
-      padding: 5px 0;
+      padding: 10px;
       &:first-child {
         border: none;
       }

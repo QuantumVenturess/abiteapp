@@ -72,7 +72,14 @@ class UsersController < ApplicationController
     @user   = User.find(params[:id])
     @title  = @nav_title = @user.name
     @tables = Kaminari.paginate_array(@user.complete).page(params[:p]).per(10)
+    @detail = 'complete'
     respond_to do |format|
+      format.html {
+        render :show
+      }
+      format.js {
+        render :show
+      }
       format.json {
         hash = {
           pages: @tables.num_pages,
@@ -105,26 +112,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user     = User.find(params[:id])
-    @title    = @nav_title = @user.name
-    tables    = @user.complete
-    @tables   = Kaminari.paginate_array(tables).page(params[:p]).per(10)
-    @started  = @user.started_count
-    @sitting  = @user.sitting_count
-    @complete = tables.size
+    @user   = User.find(params[:id])
+    @title  = @nav_title = @user.name
+    @tables = @user.tables_sitting.page(params[:p])
+    @detail = 'sitting'
     respond_to do |format|
       format.html
       format.js
-      format.json {
-        hash = {
-          complete_count: @complete,
-          pages: @tables.num_pages,
-          sitting_count: @sitting,
-          started_count: @started,
-          tables: tables_to_json(@tables)
-        }
-        render json: hash
-      }
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to current_user
@@ -151,7 +145,14 @@ class UsersController < ApplicationController
     @user   = User.find(params[:id])
     @title  = @nav_title = @user.name
     @tables = @user.tables.order('created_at DESC').page(params[:p])
+    @detail = 'started'
     respond_to do |format|
+      format.html {
+        render :show
+      }
+      format.js {
+        render :show
+      }
       format.json {
         hash = {
           pages: @tables.num_pages,

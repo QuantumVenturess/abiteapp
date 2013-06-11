@@ -1,5 +1,5 @@
 // Insert data into page
-$('.userShow .complete').append('<%= j render partial: "tables/complete", 
+$('.userShowTables').append('<%= j render partial: "users/user_table", 
   collection: @tables, as: :table %>');
 // Remove and add pagination
 <% if @tables.num_pages == @tables.current_page %>

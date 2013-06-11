@@ -1,0 +1,37 @@
+<div class="completeTable link" href="<%= url_for table %>">
+  <div class="image">
+    <%= image_tag 'lazy.jpg', 'data-original' => table.place.photo, class: 'lazyLoad' %>
+  </div>
+  <div class="title">
+    <div class="name">
+      <p>
+        <% if @detail == 'started' || @detail == 'sitting' %>
+          <%= table.place.name %>
+        <% elsif @detail == 'complete' %>
+          <%= table.place.name %> completed
+        <% end %>
+      </p>
+    </div>
+    <div class="timestamp">
+      <p>
+        <% if @detail == 'started' %>
+          <% if table.start_date %>
+            starting in
+            <%= distance_of_time_in_words(Time.zone.now, table.start_date) %>
+          <% else %>
+            not sure when to start
+          <% end %>
+        <% elsif @detail == 'sitting' %>
+          <% if table.seats.size - 1 == 0 %>
+            sitting with nobody yet, come join
+          <% else %>
+            sitting with <%= pluralize(table.seats.size - 1, 'other') %>
+          <% end %>
+        <% elsif @detail == 'complete' %>
+          <%= time_ago_in_words(table.date_complete) %> ago
+          with <%= pluralize(table.seats.size - 1, 'other') %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

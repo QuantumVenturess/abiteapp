@@ -1,44 +1,46 @@
 <div class="userShow">
-  <div class="top">
-    <div class="image">
-      <%= image_tag 'lazy.jpg', 'data-original' => @user.photo, class: 'lazyLoad' %>
+  <div class="userView">
+    <div class="top">
+      <div class="image">
+        <%= image_tag 'lazy.jpg', 'data-original' => @user.photo, class: 'lazyLoad' %>
+      </div>
+      <div class="info">
+        <div class="name">
+          <p><%= @user.first_name %></p>
+          <p><%= @user.last_name %></p>
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="info">
-      <div class="name">
-        <p><%= @user.first_name %></p>
-        <p><%= @user.last_name %></p>
+    <div class="stats">
+      <div class="group link <%= 'active' if @detail == 'started' %>" href="<%= started_user_path(@user) %>">
+        <div class="data">
+          <%= @user.tables.size %>
+        </div>
+        <div class="label">
+          Started
+        </div>
+      </div>
+      <div class="group link middle <%= 'active' if @detail == 'sitting' %>" href="<%= user_path(@user) %>">
+        <div class="data">
+          <%= @user.tables_sitting.size %>
+        </div>
+        <div class="label">
+          Sitting
+        </div>
+      </div>
+      <div class="group link <%= 'active' if @detail == 'complete' %>" href="<%= complete_user_path(@user) %>">
+        <div class="data">
+          <%= @user.complete.size %>
+        </div>
+        <div class="label">
+          Complete
+        </div>
       </div>
     </div>
-    <div class="clear"></div>
   </div>
-  <div class="stats">
-    <div class="group">
-      <div class="data">
-        <%= @started %>
-      </div>
-      <div class="label">
-        Started
-      </div>
-    </div>
-    <div class="group middle">
-      <div class="data">
-        <%= @sitting %>
-      </div>
-      <div class="label">
-        Sitting
-      </div>
-    </div>
-    <div class="group">
-      <div class="data">
-        <%= @complete %>
-      </div>
-      <div class="label">
-        Complete
-      </div>
-    </div>
-  </div>
-  <div class="complete">
-    <%= render partial: 'tables/complete', collection: @tables, as: :table %>
+  <div class="userShowTables">
+    <%= render partial: 'users/user_table', collection: @tables, as: :table %>
   </div>
 </div>
 <div class="page">
