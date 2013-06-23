@@ -63,6 +63,14 @@ class SessionsController < ApplicationController
 
   def new
     @title = 'Join'
+    @ios   = request.env['HTTP_USER_AGENT'] =~ /ipad|iphone/i
+    if @ios
+      @ios_link = 'http://appstore.com/biteapp'
+      @target   = ''
+    else
+      @ios_link = 'https://itunes.apple.com/us/app/bite-app/id661010278?mt=8'
+      @target   = '_blank'
+    end
   end
 
   def destroy

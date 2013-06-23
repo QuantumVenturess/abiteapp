@@ -9,19 +9,13 @@
   imageBackground
 <% end %>
 <div class="signIn">
-  <div class="biteImage">
-    <%= link_to about_path do %>
-      <%= image_tag 'bite_image3.png' %>
-    <% end %>
-  </div>
   <div class="biteLogo">
     <%= link_to about_path do %>
-      <%= image_tag 'logo.png' %>
+      <%= image_tag 'bite_image_logo.png' %>
     <% end %>
   </div>
   <div class="intro">
     <h1>Never eat alone</h1>
-    <h2>How it works</h2>
     <ol>
       <li>Start your own table so friends can join</li>
       <li>Join your friend's table</li>
@@ -29,4 +23,7 @@
     </ol>
   </div>
   <%= render partial: 'shared/facebook_auth' %>
+  <%= link_to @ios_link, class: 'appStoreBadge', target: @target do %>
+    <%= image_tag '/assets/app_store_badge.svg', type: 'image/svg+xml' %>
+  <% end %>
 </div>
