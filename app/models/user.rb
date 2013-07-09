@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
 
   def self.authenticate_with_token(id, token)
     if id == 0 && token
-      id    = token.split('00000')[0]
-      token = token.split('00000')[1]
+      id    = token.split('x00000x')[0]
+      token = token.split('x00000x')[1]
     end
     user = User.find(id)
     user.token == token ? user : nil if user

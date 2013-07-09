@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         user.facebook_id  = facebook_id
       end
       if user.save
-        bite_token = "#{user.id}00000#{user.token}"
+        bite_token = "#{user.id}x00000x#{user.token}"
       else
         bite_token = 'user save false'
       end
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       last_name = token.split(partial)[1]
       user = User.find_by_facebook_id_and_last_name(facebook_id, last_name)
     end
-    bite_token = user ? "#{user.id}00000#{user.token}" : 'user nil'
+    bite_token = user ? "#{user.id}x00000x#{user.token}" : 'user nil'
     dictionary = {
       bite_access_token: bite_token
     }
