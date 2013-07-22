@@ -29,7 +29,7 @@ def start_table
   table = Table.new
   table.max_seats  = max_seats + 5
   table.place      = place
-  table.start_date = Time.zone.now + 1.day
+  table.start_date = Time.zone.now + 1.hour
   table.user       = users[0]
   table.save
   # Create a seat for each user
