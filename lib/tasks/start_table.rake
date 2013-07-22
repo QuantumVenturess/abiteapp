@@ -11,7 +11,7 @@ def start_table
   if Rails.env.production?
     user_ids = [4, 7, 10, 31, 33, 35, 43, 44, 45, 48]
     # Randomly choose the number of seats at the table (2 - 10)
-    max_seats = (2..user_ids.size).to_a.sample
+    max_seats = (2..(user_ids.size / 2)).to_a.sample
     # Shuffle and randomize the pool of users who will sit at the table
     new_user_ids = user_ids.shuffle[0, max_seats]
     users = []
