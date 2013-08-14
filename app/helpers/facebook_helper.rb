@@ -2,7 +2,7 @@ module FacebookHelper
 
   def app_id
     if Rails.env.production?
-      '113847918785782'
+      ENV['FACEBOOK_APP_ID']
     else
       '171528796344918'
     end
@@ -10,7 +10,7 @@ module FacebookHelper
 
   def app_secret
     if Rails.env.production?
-      'eae4ebadce8aaeba419703ee1f4dbe8d'
+      ENV['FACEBOOK_APP_SECRET']
     else
       '78f66ce168ad71d205f730d50e368d46'
     end

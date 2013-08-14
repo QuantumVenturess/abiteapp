@@ -14,7 +14,7 @@ else
     authentication:       :plain,
     domain:               'abiteapp.com',
     enable_starttls_auto: true,
-    password:             'ereiniondebitc',
+    password:             '',
     port:                 587,
     user_name:            'hello@abiteapp.com'
   }
