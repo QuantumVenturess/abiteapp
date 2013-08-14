@@ -87,8 +87,8 @@ class Place < ActiveRecord::Base
       image.format 'jpg'
       image.write self.resized_image_path
       s3 = AWS::S3.new(
-        access_key_id: 'AKIAIXM2DMH4M2PAT5TA',
-        secret_access_key: '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')
+        access_key_id: ENV['AMAZON_AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AMAZON_AWS_SECRET_ACCESS_KEY'])
       bucket = s3.buckets['abiteapp']
       obj = bucket.objects["#{self.yelp_id}.jpg"]
       obj.write(Pathname.new(self.resized_image_path))
