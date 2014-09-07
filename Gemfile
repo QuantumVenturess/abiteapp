@@ -22,7 +22,7 @@ gem 'oauth'
 gem 'parse-ruby-client'
 
 gem 'pg'
-gem 'roadie'
+gem 'roadie', "~> 2.4"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
