@@ -6,6 +6,7 @@ gem 'annotate', '>=2.5.0'
 gem 'aws-sdk', '~> 1.0'
 gem 'dalli'
 gem 'delayed_job_active_record'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'fastimage'
 gem 'fb_graph'
 gem 'friendly_id'

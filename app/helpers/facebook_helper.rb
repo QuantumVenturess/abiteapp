@@ -1,19 +1,11 @@
 module FacebookHelper
 
   def app_id
-    if Rails.env.production?
-      ENV['FACEBOOK_APP_ID']
-    else
-      '171528796344918'
-    end
+    ENV['FACEBOOK_APP_ID']
   end
 
   def app_secret
-    if Rails.env.production?
-      ENV['FACEBOOK_APP_SECRET']
-    else
-      '78f66ce168ad71d205f730d50e368d46'
-    end
+    ENV['FACEBOOK_APP_SECRET']
   end
 
   def check_permissions(facebook_id, access_token)

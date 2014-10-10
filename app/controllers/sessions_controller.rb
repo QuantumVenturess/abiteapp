@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     access_token = response.to_s.split('=')[1].split('&')[0]
     api_call = HTTParty.get(
       "https://graph.facebook.com/me?access_token=#{access_token}")
-    results = JSON.parse(api_call.to_json)
+    results = JSON.parse(api_call)
     email       = results['email']
     facebook_id = results['id']
     first_name  = results['first_name']
