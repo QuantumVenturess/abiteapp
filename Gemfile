@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 
 gem 'rails', '3.2.12'
 
@@ -19,9 +20,7 @@ gem 'mini_magick', '~> 3.5.0'
 gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'oauth'
-
 gem 'parse-ruby-client'
-
 gem 'pg'
 gem 'roadie', "~> 2.4"
 
@@ -36,7 +35,5 @@ group :development do
 end
 
 group :production do
-  gem 'newrelic_rpm'
-  gem 'pg'
   gem 'thin'
 end
